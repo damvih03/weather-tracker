@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id "io.freefair.lombok" version "8.10"
+}
+
+group = 'com.damvih'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
+    implementation 'org.postgresql:postgresql:42.7.4'
+    implementation 'org.hibernate.orm:hibernate-core:6.6.0.Final'
+    implementation 'org.modelmapper:modelmapper:3.2.1'
+
+}
+
