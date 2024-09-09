@@ -5,7 +5,7 @@ import com.damvih.entities.User;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateUtil {
+public class PersistenceUtil {
 
     private static final EntityManagerFactory INSTANCE;
 
@@ -28,7 +28,7 @@ public class HibernateUtil {
         return INSTANCE;
     }
 
-    private HibernateUtil() {
+    private PersistenceUtil() {
 
     }
 
