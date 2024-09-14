@@ -1,4 +1,4 @@
-package com.damvih;
+package com.damvih.listeners;
 
 import com.damvih.dao.SessionDao;
 import com.damvih.dao.UserDao;
@@ -10,7 +10,7 @@ import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
 @WebListener
-public class ContextListener implements ServletContextListener {
+public class AppListener implements ServletContextListener {
 
     private EntityManagerFactory entityManagerFactory;
 
