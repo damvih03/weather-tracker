@@ -52,7 +52,6 @@ public class SignInServlet extends BaseServlet {
             throw new InvalidPasswordException();
         }
 
-        getSessionDao().deleteByUser(user);
         Session createdSession = createSession(user);
         addCookie(response, createdSession);
     }
