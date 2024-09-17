@@ -16,7 +16,7 @@ public class SignOutServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Session session = getSessionByCookie(request).orElseThrow(SessionNotFoundException::new);
-        getSessionDao().delete(session);
+        getSessionDao().deleteByUser(session.getUser());
         deleteCookie(response);
         response.sendRedirect("/sign-in");
     }
