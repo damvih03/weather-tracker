@@ -2,7 +2,6 @@ package com.damvih.servlets;
 
 import com.damvih.entities.Session;
 import com.damvih.exceptions.SessionNotFoundException;
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
