@@ -1,26 +1,19 @@
 package com.damvih.services;
 
-import com.damvih.dao.SessionDao;
 import com.damvih.dao.UserDao;
 import com.damvih.dto.UserRegistrationDto;
 import com.damvih.dto.UserRequestDto;
-import com.damvih.entities.Session;
 import com.damvih.entities.User;
 import com.damvih.exceptions.InvalidPasswordException;
 import com.damvih.exceptions.UserNotFoundException;
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
-public class AuthService {
+public class UserService {
 
     private final UserDao userDao;
-    private final SessionDao sessionDao;
 
-    public AuthService() {
+    public UserService() {
         userDao = new UserDao();
-        sessionDao = new SessionDao();
     }
 
     public User getUser(UserRequestDto userRequestDto) {
@@ -35,21 +28,12 @@ public class AuthService {
         return user;
     }
 
-    public User saveUser(UserRegistrationDto userRegistrationDto) {
+    public User save(UserRegistrationDto userRegistrationDto) {
         User user = User.builder()
                 .login(userRegistrationDto.getLogin())
                 .password(BCrypt.hashpw(userRegistrationDto.getPassword(), BCrypt.gensalt()))
                 .build();
         return userDao.save(user);
-    }
-
-    public Session saveSession(User user) {
-        Session session = new Session(
-                UUID.randomUUID(),
-                user,
-                LocalDateTime.now().plusHours(6)
-        );
-        return sessionDao.save(session);
     }
 
 }

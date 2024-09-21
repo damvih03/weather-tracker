@@ -1,27 +1,21 @@
-package com.damvih.servlets;
+package com.damvih.servlets.auth;
 
 import com.damvih.dto.UserRequestDto;
 import com.damvih.entities.Session;
 import com.damvih.entities.User;
-import com.damvih.services.AuthService;
-import com.damvih.utils.CookieUtil;
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
 @WebServlet("/sign-in")
-public class SignInServlet extends HttpServlet {
-
-    private AuthService authService;
+public class SignInServlet extends BaseAuthServlet {
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        authService = new AuthService();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/sign-in.html").forward(request, response);
     }
 
     @Override
@@ -31,10 +25,10 @@ public class SignInServlet extends HttpServlet {
                 request.getParameter("password")
         );
 
-        User user = authService.getUser(userRequestDto);
-        Session createdSession = authService.saveSession(user);
+        User user = userService.getUser(userRequestDto);
+        Session createdSession = sessionService.save(user);
 
-        CookieUtil.addCookie(response, createdSession);
+        addCookie(response, createdSession);
     }
 
 }

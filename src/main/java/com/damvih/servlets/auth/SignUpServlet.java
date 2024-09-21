@@ -1,27 +1,21 @@
-package com.damvih.servlets;
+package com.damvih.servlets.auth;
 
 import com.damvih.dto.UserRegistrationDto;
 import com.damvih.entities.Session;
 import com.damvih.entities.User;
-import com.damvih.services.AuthService;
-import com.damvih.utils.CookieUtil;
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
 @WebServlet("/sign-up")
-public class SignUpServlet extends HttpServlet {
-
-    private AuthService authService;
+public class SignUpServlet extends BaseAuthServlet {
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        authService = new AuthService();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/sign-up.html").forward(request, response);
     }
 
     @Override
@@ -32,11 +26,11 @@ public class SignUpServlet extends HttpServlet {
                 request.getParameter("confirmedPassword")
         );
 
-        User user = authService.saveUser(userRegistrationDto);
-        Session createdSession = authService.saveSession(user);
+        User user = userService.save(userRegistrationDto);
+        Session createdSession = sessionService.save(user);
 
-        CookieUtil.addCookie(response, createdSession);
-        response.sendRedirect("index.html");
+        addCookie(response, createdSession);
+        response.sendRedirect("/home");
     }
 
 }
