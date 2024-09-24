@@ -3,6 +3,7 @@ package com.damvih.servlets.auth;
 import com.damvih.entities.Session;
 import com.damvih.services.SessionService;
 import com.damvih.services.UserService;
+import com.damvih.utils.CookieUtil;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -20,7 +21,7 @@ abstract public class BaseAuthServlet extends HttpServlet {
     }
 
     protected void addCookie(HttpServletResponse response, Session session) {
-        response.addCookie(sessionService.createCookie(session));
+        response.addCookie(CookieUtil.createCookie(session));
     }
 
 }
