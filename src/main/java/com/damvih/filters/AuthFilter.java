@@ -2,6 +2,7 @@ package com.damvih.filters;
 
 import com.damvih.entities.Session;
 import com.damvih.services.SessionService;
+import com.damvih.utils.CookieUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @WebFilter("/*")
 public class AuthFilter implements Filter {
@@ -31,7 +33,12 @@ public class AuthFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        Optional<Session> session = sessionService.getSessionByCookie(request.getCookies());
+        Optional<UUID> id = CookieUtil.getUuidByCookie(request.getCookies());
+
+        Optional<Session> session = Optional.empty();
+        if (id.isPresent()) {
+            session = sessionService.findById(id.get());
+        }
 
         String path = request.getRequestURI();
         if (!allowedUrlsWithoutSession.contains(path)) {
