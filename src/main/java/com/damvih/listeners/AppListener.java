@@ -2,6 +2,9 @@ package com.damvih.listeners;
 
 import com.damvih.dao.SessionDao;
 import com.damvih.dao.UserDao;
+import com.damvih.services.SessionService;
+import com.damvih.services.UserService;
+import com.damvih.services.WeatherApiService;
 import com.damvih.utils.PersistenceUtil;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletContext;
@@ -32,7 +35,14 @@ public class AppListener implements ServletContextListener {
     }
 
     private void createServiceObjects(ServletContext servletContext) {
+        UserService userService = new UserService();
+        servletContext.setAttribute("UserService", userService);
 
+        SessionService sessionService = new SessionService();
+        servletContext.setAttribute("SessionService", sessionService);
+
+        WeatherApiService weatherApiService = new WeatherApiService();
+        servletContext.setAttribute("WeatherApiService", weatherApiService);
     }
 
     private void createDaoObjects(ServletContext servletContext) {
