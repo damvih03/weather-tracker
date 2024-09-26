@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "locations")
+@Table(name = "locations", uniqueConstraints = @UniqueConstraint(columnNames = {"longitude", "latitude"}))
 @Getter
 @Setter
 @NoArgsConstructor
