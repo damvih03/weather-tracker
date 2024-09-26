@@ -20,6 +20,8 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    private String name;
+
     private BigDecimal longitude;
 
     private BigDecimal latitude;
