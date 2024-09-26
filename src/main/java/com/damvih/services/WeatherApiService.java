@@ -4,12 +4,14 @@ import com.damvih.dto.api.geocoding.GeocodingApiResponseDto;
 import com.damvih.dto.api.geocoding.LocationApiDto;
 import com.damvih.dto.api.weather.WeatherApiResponseDto;
 import com.damvih.exceptions.ExternalApiException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 import java.util.Objects;
 
 public class WeatherApiService {
@@ -25,7 +27,8 @@ public class WeatherApiService {
             URI uri = buildUriForGeocodingRequest(locationName);
             HttpRequest request = buildRequest(uri);
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return objectMapper.readValue(response.body(), GeocodingApiResponseDto.class);
+            List<LocationApiDto> locations = objectMapper.readValue(response.body(), new TypeReference<>() {});
+            return new GeocodingApiResponseDto(locationName, locations);
         } catch (Exception exception) {
             throw new ExternalApiException();
         }
