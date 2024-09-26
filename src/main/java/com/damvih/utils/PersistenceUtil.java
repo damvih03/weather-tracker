@@ -1,5 +1,6 @@
 package com.damvih.utils;
 
+import com.damvih.entities.Location;
 import com.damvih.entities.Session;
 import com.damvih.entities.User;
 import jakarta.persistence.EntityManagerFactory;
@@ -35,6 +36,7 @@ public class PersistenceUtil {
     private static void addEntities(Configuration configuration) {
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Session.class);
+        configuration.addAnnotatedClass(Location.class);
     }
 
 }
