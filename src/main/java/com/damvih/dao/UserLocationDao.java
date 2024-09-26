@@ -20,7 +20,12 @@ public class UserLocationDao extends Dao<UserLocation> {
             transaction.begin();
 
             List<Location> locations = entityManager
-                    .createQuery("select l from Location l where user=:user", Location.class)
+                    .createQuery("""
+                            select l from Location l
+                            join UserLocation ul on ul.userLocationCompositeKey.location = l
+                            where ul.userLocationCompositeKey.user=:user
+                            """,
+                            Location.class)
                     .setParameter("user", user)
                     .getResultList();
 
