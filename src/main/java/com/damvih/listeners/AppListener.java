@@ -3,6 +3,7 @@ package com.damvih.listeners;
 import com.damvih.dao.LocationDao;
 import com.damvih.dao.SessionDao;
 import com.damvih.dao.UserDao;
+import com.damvih.services.LocationService;
 import com.damvih.services.SessionService;
 import com.damvih.services.UserService;
 import com.damvih.services.WeatherApiService;
@@ -45,6 +46,11 @@ public class AppListener implements ServletContextListener {
                 (SessionDao) servletContext.getAttribute("SessionDao")
         );
         servletContext.setAttribute("SessionService", sessionService);
+
+        LocationService locationService = new LocationService(
+                (LocationDao) servletContext.getAttribute("LocationDao")
+        );
+        servletContext.setAttribute("LocationService", locationService);
 
         WeatherApiService weatherApiService = new WeatherApiService();
         servletContext.setAttribute("WeatherApiService", weatherApiService);
