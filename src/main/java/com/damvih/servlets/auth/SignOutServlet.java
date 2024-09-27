@@ -15,7 +15,7 @@ public class SignOutServlet extends BaseAuthServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Session session = (Session) request.getServletContext().getAttribute(AuthFilter.SESSION_ATTRIBUTE_NAME);
+        Session session = (Session) request.getAttribute(AuthFilter.SESSION_ATTRIBUTE_NAME);
         sessionService.delete(session);
         CookieUtil.deleteCookie(response);
         response.sendRedirect("/sign-in");
