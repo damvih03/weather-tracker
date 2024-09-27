@@ -3,10 +3,8 @@ package com.damvih.listeners;
 import com.damvih.dao.LocationDao;
 import com.damvih.dao.SessionDao;
 import com.damvih.dao.UserDao;
-import com.damvih.services.LocationService;
-import com.damvih.services.SessionService;
-import com.damvih.services.UserService;
-import com.damvih.services.WeatherApiService;
+import com.damvih.dao.UserLocationDao;
+import com.damvih.services.*;
 import com.damvih.utils.PersistenceUtil;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletContext;
@@ -52,6 +50,10 @@ public class AppListener implements ServletContextListener {
         );
         servletContext.setAttribute("LocationService", locationService);
 
+        UserLocationService userLocationService = new UserLocationService(
+                (UserLocationDao) servletContext.getAttribute("UserLocationDao")
+        );
+
         WeatherApiService weatherApiService = new WeatherApiService();
         servletContext.setAttribute("WeatherApiService", weatherApiService);
     }
@@ -65,6 +67,9 @@ public class AppListener implements ServletContextListener {
 
         LocationDao locationDao = new LocationDao();
         servletContext.setAttribute("LocationDao", locationDao);
+
+        UserLocationDao userLocationDao = new UserLocationDao();
+        servletContext.setAttribute("UserLocationDao", userLocationDao);
     }
 
 }
