@@ -18,15 +18,19 @@ public class LocationService {
         this.locationDao = locationDao;
     }
 
-    public void save(LocationRequestDto locationRequestDto) {
-        roundCoordinates(locationRequestDto);
-        Location location = MapperUtil.getInstance().map(locationRequestDto, Location.class);
-        locationDao.save(location);
+    public Location findOrSave(LocationRequestDto locationRequestDto) {
+        return findByCoordinates(locationRequestDto).orElseGet(() -> save(locationRequestDto));
     }
 
     public Optional<Location> findByCoordinates(LocationRequestDto locationRequestDto) {
         roundCoordinates(locationRequestDto);
         return locationDao.findByCoordinates(locationRequestDto.getLongitude(), locationRequestDto.getLatitude());
+    }
+
+    private Location save(LocationRequestDto locationRequestDto) {
+        roundCoordinates(locationRequestDto);
+        Location location = MapperUtil.getInstance().map(locationRequestDto, Location.class);
+        return locationDao.save(location);
     }
 
     private void roundCoordinates(LocationRequestDto locationRequestDto) {
