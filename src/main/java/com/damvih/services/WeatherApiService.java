@@ -1,5 +1,6 @@
 package com.damvih.services;
 
+import com.damvih.dto.LocationRequestDto;
 import com.damvih.dto.api.geocoding.GeocodingApiResponseDto;
 import com.damvih.dto.api.geocoding.LocationApiDto;
 import com.damvih.dto.api.weather.WeatherApiResponseDto;
@@ -7,6 +8,7 @@ import com.damvih.exceptions.ExternalApiException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -34,9 +36,9 @@ public class WeatherApiService {
         }
     }
 
-    public WeatherApiResponseDto getWeatherByCoordinates(LocationApiDto locationApiDto) {
+    public WeatherApiResponseDto getWeatherByCoordinates(BigDecimal longitude, BigDecimal latitude) {
         try {
-            URI uri = buildUriForWeatherRequest(locationApiDto);
+            URI uri = buildUriForWeatherRequest(longitude, latitude);
             HttpRequest request = buildRequest(uri);
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             return objectMapper.readValue(response.body(), WeatherApiResponseDto.class);
@@ -63,12 +65,12 @@ public class WeatherApiService {
         );
     }
 
-    private URI buildUriForWeatherRequest(LocationApiDto locationApiDto) {
+    private URI buildUriForWeatherRequest(BigDecimal longitude, BigDecimal latitude) {
         return URI.create(
                 MAIN_URL
                         + WEATHER_SUFFIX
-                        + "?lat=" + locationApiDto.getLatitude()
-                        + "&lon=" + locationApiDto.getLongitude()
+                        + "?lat=" + latitude
+                        + "&lon=" + longitude
                         + "&appid=" + getKey()
         );
     }
