@@ -1,5 +1,6 @@
 package com.damvih.listeners;
 
+import com.damvih.dao.LocationDao;
 import com.damvih.dao.SessionDao;
 import com.damvih.dao.UserDao;
 import com.damvih.services.SessionService;
@@ -55,6 +56,9 @@ public class AppListener implements ServletContextListener {
 
         SessionDao sessionDao = new SessionDao();
         servletContext.setAttribute("SessionDao", sessionDao);
+
+        LocationDao locationDao = new LocationDao();
+        servletContext.setAttribute("LocationDao", locationDao);
     }
 
 }
