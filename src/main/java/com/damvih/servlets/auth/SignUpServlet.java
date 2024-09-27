@@ -3,6 +3,7 @@ package com.damvih.servlets.auth;
 import com.damvih.dto.UserRegistrationDto;
 import com.damvih.entities.Session;
 import com.damvih.entities.User;
+import com.damvih.filters.AuthFilter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,8 +30,9 @@ public class SignUpServlet extends BaseAuthServlet {
         User user = userService.save(userRegistrationDto);
         Session createdSession = sessionService.save(user);
 
+        request.setAttribute(AuthFilter.SESSION_ATTRIBUTE_NAME, createdSession);
         addCookie(response, createdSession);
-        response.sendRedirect("/home");
+        request.getRequestDispatcher("/home").forward(request, response);
     }
 
 }
