@@ -2,7 +2,11 @@ package com.damvih.servlets;
 
 import com.damvih.dto.LocationRequestDto;
 import com.damvih.dto.api.geocoding.GeocodingApiResponseDto;
+import com.damvih.entities.Location;
+import com.damvih.entities.Session;
+import com.damvih.exceptions.LocationNotFoundException;
 import com.damvih.services.LocationService;
+import com.damvih.services.UserLocationService;
 import com.damvih.services.WeatherApiService;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -19,6 +23,7 @@ public class LocationsServlet extends HttpServlet {
 
     private WeatherApiService weatherApiService;
     private LocationService locationService;
+    private UserLocationService userLocationService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -29,6 +34,10 @@ public class LocationsServlet extends HttpServlet {
         locationService = (LocationService) config
                 .getServletContext()
                 .getAttribute("LocationService");
+
+        userLocationService = (UserLocationService) config
+                .getServletContext()
+                .getAttribute("UserLocationService");
     }
 
     @Override
@@ -42,6 +51,8 @@ public class LocationsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Session session = ((Session) request.getServletContext().getAttribute("session"));
+
         String cityName = request.getParameter("city");
         String longitude = request.getParameter("lon");
         String latitude = request.getParameter("lat");
@@ -52,8 +63,28 @@ public class LocationsServlet extends HttpServlet {
                 .latitude(getValueInBigDecimal(latitude))
                 .build();
 
-        locationService.save(locationRequestDto);
+        Location location = locationService.findOrSave(locationRequestDto);
+        userLocationService.save(session.getUser(), location);
         response.sendRedirect("/home");
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Session session = ((Session) request.getServletContext().getAttribute("session"));
+
+        String longitude = request.getParameter("lon");
+        String latitude = request.getParameter("lat");
+
+        LocationRequestDto locationRequestDto = LocationRequestDto.builder()
+                .longitude(getValueInBigDecimal(longitude))
+                .latitude(getValueInBigDecimal(latitude))
+                .build();
+
+        Location location = locationService
+                .findByCoordinates(locationRequestDto)
+                .orElseThrow(LocationNotFoundException::new);
+
+        userLocationService.delete(session.getUser(), location);
     }
 
     private BigDecimal getValueInBigDecimal(String value) {
