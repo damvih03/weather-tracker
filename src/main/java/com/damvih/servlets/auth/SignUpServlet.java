@@ -30,9 +30,8 @@ public class SignUpServlet extends BaseAuthServlet {
         User user = userService.save(userRegistrationDto);
         Session createdSession = sessionService.save(user);
 
-        request.setAttribute(AuthFilter.SESSION_ATTRIBUTE_NAME, createdSession);
         addCookie(response, createdSession);
-        request.getRequestDispatcher("/home").forward(request, response);
+        response.sendRedirect("/home");
     }
 
 }

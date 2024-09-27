@@ -29,8 +29,8 @@ public class SignInServlet extends BaseAuthServlet {
         User user = userService.getUser(userRequestDto);
         Session createdSession = sessionService.save(user);
 
-        request.setAttribute(AuthFilter.SESSION_ATTRIBUTE_NAME, createdSession);
         addCookie(response, createdSession);
+        response.sendRedirect("/home");
     }
 
 }
