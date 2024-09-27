@@ -2,6 +2,7 @@ package com.damvih.dao;
 
 import com.damvih.entities.Location;
 import com.damvih.exceptions.DatabaseOperationException;
+import com.damvih.exceptions.LocationAlreadyExistsException;
 import com.damvih.utils.PersistenceUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -33,6 +34,11 @@ public class LocationDao extends Dao<Location> {
             rollbackTransaction(transaction);
             throw new DatabaseOperationException();
         }
+    }
+
+    @Override
+    protected void handleConstraintViolationException() {
+        throw new LocationAlreadyExistsException();
     }
 
 }
