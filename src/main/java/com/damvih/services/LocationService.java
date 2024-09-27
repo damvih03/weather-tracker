@@ -29,7 +29,7 @@ public class LocationService {
         return locationDao.findByCoordinates(locationRequestDto.getLongitude(), locationRequestDto.getLatitude());
     }
 
-    public void roundCoordinates(LocationRequestDto locationRequestDto) {
+    private void roundCoordinates(LocationRequestDto locationRequestDto) {
         locationRequestDto.setLongitude(locationRequestDto
                 .getLongitude()
                 .setScale(ROUNDING_ACCURACY, ROUNDING_MODE)
