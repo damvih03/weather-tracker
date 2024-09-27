@@ -25,7 +25,9 @@ public class AuthFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        sessionService = new SessionService();
+        sessionService = (SessionService) filterConfig
+                .getServletContext()
+                .getAttribute("SessionService");
     }
 
     @Override
@@ -45,9 +47,10 @@ public class AuthFilter implements Filter {
 
             if (session.isPresent()) {
                 request.setAttribute(SESSION_ATTRIBUTE_NAME, session.get());
+            } else {
+                response.sendRedirect("/sign-in");
                 return;
             }
-            response.sendRedirect("/sign-in");
 
         } else {
 

@@ -16,8 +16,13 @@ abstract public class BaseAuthServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        userService = new UserService();
-        sessionService = new SessionService();
+        userService = (UserService) config
+                .getServletContext()
+                .getAttribute("UserService");
+
+        sessionService = (SessionService) config
+                .getServletContext()
+                .getAttribute("SessionService");;
     }
 
     protected void addCookie(HttpServletResponse response, Session session) {

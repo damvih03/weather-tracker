@@ -23,8 +23,8 @@ public class AppListener implements ServletContextListener {
 
         entityManagerFactory = PersistenceUtil.getInstance();
 
-        createServiceObjects(servletContext);
         createDaoObjects(servletContext);
+        createServiceObjects(servletContext);
     }
 
     @Override
@@ -35,10 +35,14 @@ public class AppListener implements ServletContextListener {
     }
 
     private void createServiceObjects(ServletContext servletContext) {
-        UserService userService = new UserService();
+        UserService userService = new UserService(
+                (UserDao) servletContext.getAttribute("UserDao")
+        );
         servletContext.setAttribute("UserService", userService);
 
-        SessionService sessionService = new SessionService();
+        SessionService sessionService = new SessionService(
+                (SessionDao) servletContext.getAttribute("SessionDao")
+        );
         servletContext.setAttribute("SessionService", sessionService);
 
         WeatherApiService weatherApiService = new WeatherApiService();

@@ -12,8 +12,8 @@ public class SessionService {
 
     private final SessionDao sessionDao;
 
-    public SessionService() {
-        sessionDao = new SessionDao();
+    public SessionService(SessionDao sessionDao) {
+        this.sessionDao = sessionDao;
     }
 
     public Session save(User user) {

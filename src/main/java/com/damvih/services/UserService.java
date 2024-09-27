@@ -12,8 +12,8 @@ public class UserService {
 
     private final UserDao userDao;
 
-    public UserService() {
-        userDao = new UserDao();
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     public User getUser(UserRequestDto userRequestDto) {
