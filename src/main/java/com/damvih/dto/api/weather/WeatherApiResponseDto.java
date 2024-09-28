@@ -1,9 +1,12 @@
 package com.damvih.dto.api.weather;
 
+import com.damvih.utils.UnixLocalDateTimeDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -23,5 +26,9 @@ public class WeatherApiResponseDto {
     private CloudsApiDto clouds;
 
     private Integer visibility;
+
+    @JsonProperty("dt")
+    @JsonDeserialize()
+    private LocalDateTime calculationDateTime;
 
 }

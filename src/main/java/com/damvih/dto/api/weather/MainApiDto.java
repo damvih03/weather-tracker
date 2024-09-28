@@ -2,11 +2,9 @@ package com.damvih.dto.api.weather;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -27,9 +25,5 @@ public class MainApiDto {
     private Integer pressure;
 
     private Integer humidity;
-
-    @JsonProperty("dt")
-    @JsonDeserialize()
-    private LocalDateTime calculationDateTime;
 
 }
