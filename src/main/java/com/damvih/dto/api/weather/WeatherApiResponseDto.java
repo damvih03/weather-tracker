@@ -25,10 +25,13 @@ public class WeatherApiResponseDto {
     @JsonProperty("clouds")
     private CloudsApiDto clouds;
 
+    @JsonProperty("sys")
+    private SysApiDto sys;
+
     private Integer visibility;
 
     @JsonProperty("dt")
-    @JsonDeserialize()
+    @JsonDeserialize(using = UnixLocalDateTimeDeserializer.class)
     private LocalDateTime calculationDateTime;
 
 }

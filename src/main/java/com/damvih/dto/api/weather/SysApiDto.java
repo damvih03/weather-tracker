@@ -1,5 +1,6 @@
 package com.damvih.dto.api.weather;
 
+import com.damvih.utils.UnixLocalDateTimeDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -12,11 +13,11 @@ import java.time.LocalDateTime;
 public class SysApiDto {
 
     @JsonProperty("sunrise")
-    @JsonDeserialize()
+    @JsonDeserialize(using = UnixLocalDateTimeDeserializer.class)
     private LocalDateTime sunriseTime;
 
     @JsonProperty("sunset")
-    @JsonDeserialize()
+    @JsonDeserialize(using = UnixLocalDateTimeDeserializer.class)
     private LocalDateTime sunsetTime;
 
 }
