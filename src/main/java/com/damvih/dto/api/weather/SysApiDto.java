@@ -14,6 +14,7 @@ public class SysApiDto {
     @JsonProperty("sunrise")
     @JsonDeserialize()
     private LocalDateTime sunriseTime;
+
     @JsonProperty("sunset")
     @JsonDeserialize()
     private LocalDateTime sunsetTime;

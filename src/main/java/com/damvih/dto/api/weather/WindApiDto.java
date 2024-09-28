@@ -9,6 +9,7 @@ import lombok.Getter;
 public class WindApiDto {
 
     private Integer speed;
+
     @JsonProperty("deg")
     private Integer direction;
 

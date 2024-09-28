@@ -14,14 +14,20 @@ public class MainApiDto {
 
     @JsonProperty("temp")
     private BigDecimal temperature;
+
     @JsonProperty("feels_like")
     private BigDecimal feelsLike;
+
     @JsonProperty("temp_min")
     private BigDecimal minTemperature;
+
     @JsonProperty("temp_max")
     private BigDecimal maxTemperature;
+
     private Integer pressure;
+
     private Integer humidity;
+
     @JsonProperty("dt")
     @JsonDeserialize()
     private LocalDateTime calculationDateTime;
