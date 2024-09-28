@@ -1,6 +1,4 @@
-package com.damvih.utils;
-
-import com.damvih.services.SessionSchedulerTask;
+package com.damvih.utils.scheduler;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

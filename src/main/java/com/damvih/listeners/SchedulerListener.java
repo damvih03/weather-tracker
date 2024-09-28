@@ -1,6 +1,6 @@
 package com.damvih.listeners;
 
-import com.damvih.utils.SchedulerUtil;
+import com.damvih.utils.scheduler.SchedulerUtil;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;

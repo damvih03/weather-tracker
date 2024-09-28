@@ -1,4 +1,4 @@
-package com.damvih.services;
+package com.damvih.utils.scheduler;
 
 import com.damvih.dao.SessionDao;
 
