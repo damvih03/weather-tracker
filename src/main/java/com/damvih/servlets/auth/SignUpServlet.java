@@ -3,7 +3,6 @@ package com.damvih.servlets.auth;
 import com.damvih.dto.UserRegistrationDto;
 import com.damvih.entities.Session;
 import com.damvih.entities.User;
-import com.damvih.filters.AuthFilter;
 import com.damvih.utils.ValidationUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
