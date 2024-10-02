@@ -4,6 +4,7 @@ import com.damvih.dto.UserRegistrationDto;
 import com.damvih.entities.Session;
 import com.damvih.entities.User;
 import com.damvih.filters.AuthFilter;
+import com.damvih.utils.ValidationUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +27,8 @@ public class SignUpServlet extends BaseAuthServlet {
                 request.getParameter("password"),
                 request.getParameter("confirmedPassword")
         );
+
+        ValidationUtil.validateUserRegistration(userRegistrationDto);
 
         User user = userService.save(userRegistrationDto);
         Session createdSession = sessionService.save(user);
