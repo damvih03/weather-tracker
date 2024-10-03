@@ -22,6 +22,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-simple:2.0.16'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.3'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.14.1'
+    testImplementation 'com.h2database:h2:2.3.232'
 }
 
 test {
