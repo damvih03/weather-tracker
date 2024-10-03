@@ -22,7 +22,7 @@ abstract public class BaseAuthServlet extends HttpServlet {
 
         sessionService = (SessionService) config
                 .getServletContext()
-                .getAttribute("SessionService");;
+                .getAttribute("SessionService");
     }
 
     protected void addCookie(HttpServletResponse response, Session session) {
