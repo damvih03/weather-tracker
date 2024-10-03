@@ -24,3 +24,6 @@ dependencies {
     testImplementation 'org.mockito:mockito-junit-jupiter:5.14.1'
 }
 
+test {
+    useJUnitPlatform()
+}
