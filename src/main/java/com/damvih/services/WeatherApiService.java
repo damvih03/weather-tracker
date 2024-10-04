@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -33,7 +34,7 @@ public class WeatherApiService {
         try {
             URI uri = buildUriForGeocodingRequest(locationName);
             HttpRequest request = buildRequest(uri);
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = getResponseIfValid(request);
             List<LocationApiDto> locations = objectMapper.readValue(response.body(), new TypeReference<>() {});
             return new GeocodingApiResponseDto(locationName, locations);
         } catch (Exception exception) {
@@ -45,7 +46,7 @@ public class WeatherApiService {
         try {
             URI uri = buildUriForWeatherRequest(longitude, latitude);
             HttpRequest request = buildRequest(uri);
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = getResponseIfValid(request);
             return objectMapper.readValue(response.body(), WeatherApiResponseDto.class);
         } catch (Exception exception) {
             throw new ExternalApiException();
@@ -78,6 +79,27 @@ public class WeatherApiService {
                         + "&lon=" + longitude
                         + "&appid=" + getKey()
         );
+    }
+
+    private HttpResponse<String> getResponseIfValid(HttpRequest request) throws IOException, InterruptedException {
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        int responseCode = response.statusCode();
+
+        if (isClientError(responseCode) || isServerError(responseCode)) {
+            throw new ExternalApiException();
+        }
+
+        return response;
+
+    }
+
+    private boolean isClientError(int responseCode) {
+        return responseCode >= 400 && responseCode < 500;
+    }
+
+    private boolean isServerError(int responseCode) {
+        return responseCode >= 500 && responseCode < 600;
     }
 
     private String getKey() {
