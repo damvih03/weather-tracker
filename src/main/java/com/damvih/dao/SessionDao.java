@@ -36,7 +36,7 @@ public class SessionDao extends Dao<Session> {
             transaction.begin();
 
             entityManager
-                    .createQuery("delete from Session s where expiredAt<=:dateTime")
+                    .createQuery("delete from Session s where expiresAt<=:dateTime")
                     .setParameter("dateTime", dateTime)
                     .executeUpdate();
 
