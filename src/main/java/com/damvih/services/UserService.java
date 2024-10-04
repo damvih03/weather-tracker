@@ -6,15 +6,13 @@ import com.damvih.dto.UserRequestDto;
 import com.damvih.entities.User;
 import com.damvih.exceptions.InvalidPasswordException;
 import com.damvih.exceptions.UserNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserDao userDao;
-
-    public UserService(UserDao userDao) {
-        this.userDao = userDao;
-    }
 
     public User getUser(UserRequestDto userRequestDto) {
         User user = userDao

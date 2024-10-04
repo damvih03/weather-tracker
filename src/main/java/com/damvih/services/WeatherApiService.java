@@ -1,12 +1,12 @@
 package com.damvih.services;
 
-import com.damvih.dto.LocationRequestDto;
 import com.damvih.dto.api.geocoding.GeocodingApiResponseDto;
 import com.damvih.dto.api.geocoding.LocationApiDto;
 import com.damvih.dto.api.weather.WeatherApiResponseDto;
 import com.damvih.exceptions.ExternalApiException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -16,13 +16,18 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Objects;
 
+@RequiredArgsConstructor
 public class WeatherApiService {
 
     private static final String MAIN_URL = "https://api.openweathermap.org";
     private static final String WEATHER_SUFFIX = "/data/2.5/weather";
     private static final String GEOCODING_SUFFIX = "/geo/1.0/direct";
-    private final HttpClient client = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final HttpClient client;
+
+    public WeatherApiService() {
+        this.client = HttpClient.newHttpClient();
+    }
 
     public GeocodingApiResponseDto getLocationsByName(String locationName) {
         try {

@@ -5,10 +5,10 @@ import com.damvih.entities.Location;
 import com.damvih.entities.User;
 import com.damvih.entities.UserLocation;
 import com.damvih.entities.UserLocationCompositeKey;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class UserLocationService {
-
-    private final UserLocationDao userLocationDao;
 
     public UserLocationService(UserLocationDao userLocationDao) {
         this.userLocationDao = userLocationDao;
