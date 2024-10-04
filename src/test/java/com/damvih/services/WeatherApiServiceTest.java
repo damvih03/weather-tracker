@@ -25,8 +25,10 @@ public class WeatherApiServiceTest {
 
     @InjectMocks
     private WeatherApiService weatherApiService;
+
     @Mock
     private HttpClient httpClient;
+
     @Mock
     private HttpResponse<String> httpResponse;
 
