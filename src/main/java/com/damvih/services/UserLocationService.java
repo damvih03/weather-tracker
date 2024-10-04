@@ -10,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserLocationService {
 
-    public UserLocationService(UserLocationDao userLocationDao) {
-        this.userLocationDao = userLocationDao;
-    }
+    private final UserLocationDao userLocationDao;
 
     public UserLocation save(User user, Location location) {
         UserLocationCompositeKey userLocationCompositeKey = new UserLocationCompositeKey(user, location);
