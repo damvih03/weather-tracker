@@ -30,7 +30,7 @@ public class SessionDaoTest {
     }
 
     @Test
-    public void testDeleteActualSession() {
+    public void testDeletingActualSession() {
         UUID sessionId = UUID.randomUUID();
 
         sessionDao.save(new Session(
@@ -46,7 +46,7 @@ public class SessionDaoTest {
     }
 
     @Test
-    public void testDeleteExpiredSession() {
+    public void testDeletingExpiredSession() {
         UUID sessionId = UUID.randomUUID();
 
         sessionDao.save(new Session(
