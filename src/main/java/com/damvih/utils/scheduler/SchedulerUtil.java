@@ -1,5 +1,7 @@
 package com.damvih.utils.scheduler;
 
+import com.damvih.dao.SessionDao;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -14,7 +16,7 @@ public class SchedulerUtil {
     }
 
     public void start() {
-        scheduler.scheduleAtFixedRate(new SessionSchedulerTask(), 0, 1, TimeUnit.HOURS);
+        scheduler.scheduleAtFixedRate(new SessionSchedulerTask(new SessionDao()), 0, 1, TimeUnit.HOURS);
     }
 
     public void stop() {
