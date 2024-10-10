@@ -9,7 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
 
-abstract public class BaseAuthServlet extends HttpServlet {
+abstract public class AuthServlet extends HttpServlet {
 
     protected UserService userService;
     protected SessionService sessionService;
