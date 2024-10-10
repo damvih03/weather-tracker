@@ -15,7 +15,7 @@ public class SignInServlet extends AuthServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/templates/sign-in.html").forward(request, response);
+        templateEngine.process("sign-in", webContext, response.getWriter());
     }
 
     @Override
