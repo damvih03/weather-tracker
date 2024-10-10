@@ -46,7 +46,7 @@ public class LocationsServlet extends HttpServlet {
 
         GeocodingApiResponseDto geocodingApiResponse = weatherApiService.getLocationsByName(cityName);
         request.setAttribute("locations", geocodingApiResponse);
-        request.getRequestDispatcher("/WEB-INF/locations.html").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/templates/locations.html").forward(request, response);
     }
 
     @Override

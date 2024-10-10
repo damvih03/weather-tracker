@@ -16,7 +16,7 @@ public class SignUpServlet extends BaseAuthServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/sign-up.html").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/templates/sign-up.html").forward(request, response);
     }
 
     @Override

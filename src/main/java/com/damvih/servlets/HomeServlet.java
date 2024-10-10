@@ -51,7 +51,7 @@ public class HomeServlet extends HttpServlet {
         }
 
         request.setAttribute("locationsWeathers", locationsWeathers);
-        request.getRequestDispatcher("/WEB-INF/index.html").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/templates/index.html").forward(request, response);
     }
 
 }
