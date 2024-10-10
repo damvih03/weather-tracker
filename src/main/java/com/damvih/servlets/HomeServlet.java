@@ -42,7 +42,7 @@ public class HomeServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Session session = ((Session) request.getServletContext().getAttribute("session"));
+        Session session = (Session) request.getAttribute("session");
 
         List<Location> locations = userLocationDao.findLocationsByUser(session.getUser());
         Map<Location, WeatherApiResponseDto> locationsWeathers = new HashMap<>();
