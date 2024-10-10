@@ -21,6 +21,8 @@ abstract public class BaseServlet extends HttpServlet {
         templateEngine = (ITemplateEngine) config
                 .getServletContext()
                 .getAttribute("templateEngine");
+
+        super.init(config);
     }
 
     @Override

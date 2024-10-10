@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 @WebServlet("/locations")
-public class LocationsServlet extends HttpServlet {
+public class LocationsServlet extends BaseServlet {
 
     private WeatherApiService weatherApiService;
     private LocationService locationService;
@@ -38,6 +38,8 @@ public class LocationsServlet extends HttpServlet {
         userLocationService = (UserLocationService) config
                 .getServletContext()
                 .getAttribute("UserLocationService");
+
+        super.init(config);
     }
 
     @Override
@@ -45,8 +47,9 @@ public class LocationsServlet extends HttpServlet {
         String cityName = request.getParameter("city");
 
         GeocodingApiResponseDto geocodingApiResponse = weatherApiService.getLocationsByName(cityName);
-        request.setAttribute("locations", geocodingApiResponse);
-        request.getRequestDispatcher("/WEB-INF/templates/locations.html").forward(request, response);
+
+        webContext.setVariable("locations", geocodingApiResponse);
+        templateEngine.process("locations", webContext, response.getWriter());
     }
 
     @Override

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/home", ""})
-public class HomeServlet extends HttpServlet {
+public class HomeServlet extends BaseServlet {
 
     private WeatherApiService weatherApiService;
     private UserLocationDao userLocationDao;
@@ -36,6 +36,8 @@ public class HomeServlet extends HttpServlet {
         userLocationDao = (UserLocationDao) config
                 .getServletContext()
                 .getAttribute("UserLocationDao");
+
+        super.init(config);
     }
 
     @Override
@@ -50,8 +52,8 @@ public class HomeServlet extends HttpServlet {
             locationsWeathers.put(location, weatherApiService.getWeatherByCoordinates(longitude, latitude));
         }
 
-        request.setAttribute("locationsWeathers", locationsWeathers);
-        request.getRequestDispatcher("/WEB-INF/templates/index.html").forward(request, response);
+        webContext.setVariable("locationsWeathers", locationsWeathers);
+        templateEngine.process("index", webContext, response.getWriter());
     }
 
 }
