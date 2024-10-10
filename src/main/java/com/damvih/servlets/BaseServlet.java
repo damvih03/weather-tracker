@@ -7,14 +7,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.thymeleaf.ITemplateEngine;
-import org.thymeleaf.context.IWebContext;
+import org.thymeleaf.context.WebContext;
 
 import java.io.IOException;
 
 abstract public class BaseServlet extends HttpServlet {
 
     protected ITemplateEngine templateEngine;
-    protected IWebContext webContext;
+    protected WebContext webContext;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -25,7 +25,7 @@ abstract public class BaseServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        webContext = ThymeleafUtil.buildWebContext(request, response, getServletContext());
+        webContext = (WebContext) ThymeleafUtil.buildWebContext(request, response, getServletContext());
         super.service(request, response);
     }
 
