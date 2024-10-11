@@ -28,6 +28,7 @@ public class WeatherApiResponseDto {
     @JsonProperty("sys")
     private SysApiDto sys;
 
+    @JsonProperty("visibility")
     private Integer visibility;
 
     @JsonProperty("dt")
