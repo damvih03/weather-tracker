@@ -53,6 +53,7 @@ public class AppListener implements ServletContextListener {
         UserLocationService userLocationService = new UserLocationService(
                 (UserLocationDao) servletContext.getAttribute("UserLocationDao")
         );
+        servletContext.setAttribute("UserLocationService", userLocationService);
 
         WeatherApiService weatherApiService = new WeatherApiService();
         servletContext.setAttribute("WeatherApiService", weatherApiService);
