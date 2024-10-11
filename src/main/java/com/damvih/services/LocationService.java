@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LocationService {
 
-    private static final int ROUNDING_ACCURACY = 3;
+    private static final int ROUNDING_ACCURACY = 2;
     private static final RoundingMode ROUNDING_MODE = RoundingMode.UP;
     private final LocationDao locationDao;
 
