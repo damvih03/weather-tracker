@@ -54,7 +54,7 @@ public class LocationsServlet extends BaseServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Session session = ((Session) request.getServletContext().getAttribute("session"));
+        Session session = (Session) request.getAttribute("session");
 
         String cityName = request.getParameter("locationName");
         String longitude = request.getParameter("lon");
