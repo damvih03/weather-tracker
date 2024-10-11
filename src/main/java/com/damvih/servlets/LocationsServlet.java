@@ -73,7 +73,7 @@ public class LocationsServlet extends BaseServlet {
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Session session = ((Session) request.getServletContext().getAttribute("session"));
+        Session session = (Session) request.getAttribute("session");
 
         String longitude = request.getParameter("lon");
         String latitude = request.getParameter("lat");
