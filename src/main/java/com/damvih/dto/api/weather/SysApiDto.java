@@ -20,4 +20,7 @@ public class SysApiDto {
     @JsonDeserialize(using = UnixLocalDateTimeDeserializer.class)
     private LocalDateTime sunsetTime;
 
+    @JsonProperty("country")
+    private String country;
+
 }
