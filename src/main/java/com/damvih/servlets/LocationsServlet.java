@@ -44,11 +44,11 @@ public class LocationsServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String cityName = request.getParameter("city");
+        String cityName = request.getParameter("locationName");
 
         GeocodingApiResponseDto geocodingApiResponse = weatherApiService.getLocationsByName(cityName);
 
-        webContext.setVariable("locations", geocodingApiResponse);
+        webContext.setVariable("geocodingApiResponse", geocodingApiResponse);
         templateEngine.process("locations", webContext, response.getWriter());
     }
 
@@ -56,7 +56,7 @@ public class LocationsServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Session session = ((Session) request.getServletContext().getAttribute("session"));
 
-        String cityName = request.getParameter("city");
+        String cityName = request.getParameter("locationName");
         String longitude = request.getParameter("lon");
         String latitude = request.getParameter("lat");
         
