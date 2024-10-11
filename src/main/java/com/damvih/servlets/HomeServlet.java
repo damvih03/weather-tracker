@@ -1,25 +1,22 @@
 package com.damvih.servlets;
 
 import com.damvih.dao.UserLocationDao;
-import com.damvih.dto.LocationRequestDto;
-import com.damvih.dto.api.geocoding.LocationApiDto;
+import com.damvih.dto.WeatherViewDto;
+import com.damvih.dto.api.weather.WeatherApiDto;
 import com.damvih.dto.api.weather.WeatherApiResponseDto;
 import com.damvih.entities.Location;
 import com.damvih.entities.Session;
 import com.damvih.services.WeatherApiService;
-import com.damvih.utils.MapperUtil;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(urlPatterns = {"/home", ""})
 public class HomeServlet extends BaseServlet {
@@ -45,15 +42,34 @@ public class HomeServlet extends BaseServlet {
         Session session = (Session) request.getAttribute("session");
 
         List<Location> locations = userLocationDao.findLocationsByUser(session.getUser());
-        Map<Location, WeatherApiResponseDto> locationsWeathers = new HashMap<>();
+        List<WeatherViewDto> weatherCards = new ArrayList<>();
         for (Location location : locations) {
             BigDecimal longitude = location.getLongitude();
             BigDecimal latitude = location.getLatitude();
-            locationsWeathers.put(location, weatherApiService.getWeatherByCoordinates(longitude, latitude));
+            WeatherApiResponseDto weatherApiResponseDto = weatherApiService.getWeatherByCoordinates(longitude, latitude);
+
+            weatherCards.add(buildWeatherCard(location, weatherApiResponseDto));
         }
 
-        webContext.setVariable("locationsWeathers", locationsWeathers);
+        webContext.setVariable("weatherCards", weatherCards);
         templateEngine.process("index", webContext, response.getWriter());
+    }
+
+    private WeatherViewDto buildWeatherCard(Location location, WeatherApiResponseDto weatherApiResponseDto) {
+        WeatherApiDto weatherApiDto = weatherApiResponseDto.getWeather().getFirst();
+        return new WeatherViewDto(
+                location.getLongitude(),
+                location.getLatitude(),
+                location.getName(),
+                weatherApiResponseDto.getSys().getCountry(),
+
+                weatherApiResponseDto.getMain().getTemperature(),
+                weatherApiResponseDto.getMain().getFeelsLike(),
+                weatherApiDto.getDescription(),
+
+                weatherApiResponseDto.getWind().getSpeed(),
+                weatherApiResponseDto.getWind().getDirection()
+        );
     }
 
 }
