@@ -1,6 +1,7 @@
 package com.damvih.utils;
 
 import com.damvih.dto.UserRegistrationDto;
+import com.damvih.exceptions.RegistrationException;
 
 public class ValidationUtil {
 
@@ -23,25 +24,25 @@ public class ValidationUtil {
 
     private static void validateLogin(String login) {
         if (!login.matches(LOGIN_PATTERN)) {
-            throw new IllegalArgumentException();
+            throw new RegistrationException("Login does not match the pattern!");
         }
     }
 
     private static void validateIfPasswordsEquals(String password, String confirmedPassword) {
         if (!password.equals(confirmedPassword)) {
-            throw new IllegalArgumentException();
+            throw new RegistrationException("Entered passwords are not equal!");
         }
     }
 
     private static void validatePassword(String password) {
         if (!password.matches(PASSWORD_PATTERN)) {
-            throw new IllegalArgumentException();
+            throw new RegistrationException("Password does not match the pattern!");
         }
     }
 
     private static void validateParameterValue(String parameterValue) {
         if (parameterValue == null || parameterValue.isBlank()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Missed parameter!");
         }
     }
 
