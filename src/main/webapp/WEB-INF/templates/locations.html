@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Locations</title>
 </head>
 <body>
+    <h1>Locations</h1>
+
+    <div class="location-cards-container" th:with="locations=${geocodingApiResponse.locations}">
+
+        <div th:if="${#lists.isEmpty(locations)}">
+            <p>No locations found.</p>
+        </div>
+
+        <div th:else>
+            <div class="location-card" th:each="location: ${locations}">
+                <p th:text="'Name: ' + ${geocodingApiResponse.name}"></p>
+                <p th:text="'Country: ' + ${location.country}"></p>
+                <p th:text="'Longitude: ' + ${location.longitude}"></p>
+                <p th:text="'Latitude: ' + ${location.latitude}"></p>
+
+                <form action="/locations" method="post">
+                    <input type="hidden" name="locationName" th:value="${geocodingApiResponse.name}"/>
+                    <input type="hidden" name="lon" th:value="${location.longitude}"/>
+                    <input type="hidden" name="lat" th:value="${location.latitude}"/>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
 
 </body>
 </html>
