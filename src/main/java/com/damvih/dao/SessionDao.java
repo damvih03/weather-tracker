@@ -47,4 +47,9 @@ public class SessionDao extends Dao<Session> {
         }
     }
 
+    @Override
+    protected String getConstraintViolationExceptionMessage() {
+        return "";
+    }
+
 }

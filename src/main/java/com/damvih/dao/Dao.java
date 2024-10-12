@@ -1,6 +1,7 @@
 package com.damvih.dao;
 
 import com.damvih.exceptions.DatabaseOperationException;
+import com.damvih.exceptions.EntityAlreadyExistsException;
 import com.damvih.utils.PersistenceUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -33,15 +34,13 @@ abstract public class Dao<T> {
         } catch (PersistenceException exception) {
             rollbackTransaction(transaction);
             if (isConstraintViolationException(exception)) {
-                handleConstraintViolationException();
+                throw new EntityAlreadyExistsException(getConstraintViolationExceptionMessage());
             }
             throw new DatabaseOperationException();
         }
     }
 
-    protected void handleConstraintViolationException() {
-
-    }
+    abstract protected String getConstraintViolationExceptionMessage();
 
     protected void rollbackTransaction(EntityTransaction transaction) {
         if (transaction != null && transaction.isActive()) {

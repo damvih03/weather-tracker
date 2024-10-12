@@ -2,7 +2,6 @@ package com.damvih.dao;
 
 import com.damvih.entities.User;
 import com.damvih.exceptions.DatabaseOperationException;
-import com.damvih.exceptions.UserAlreadyExistsException;
 import com.damvih.utils.PersistenceUtil;
 import jakarta.persistence.*;
 
@@ -32,8 +31,8 @@ public class UserDao extends Dao<User> {
     }
 
     @Override
-    protected void handleConstraintViolationException() {
-        throw new UserAlreadyExistsException();
+    protected String getConstraintViolationExceptionMessage() {
+        return "User with this login already exists!";
     }
 
 }

@@ -3,8 +3,8 @@ package com.damvih.services;
 import com.damvih.dao.UserDao;
 import com.damvih.dto.UserRegistrationDto;
 import com.damvih.dto.UserRequestDto;
+import com.damvih.exceptions.EntityAlreadyExistsException;
 import com.damvih.exceptions.InvalidPasswordException;
-import com.damvih.exceptions.UserAlreadyExistsException;
 import com.damvih.exceptions.UserNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -44,7 +44,7 @@ public class UserServiceTest {
                 "password"
         );
         userService.save(userRegistrationDto);
-        Assertions.assertThrows(UserAlreadyExistsException.class, () -> userService.save(userRegistrationDto));
+        Assertions.assertThrows(EntityAlreadyExistsException.class, () -> userService.save(userRegistrationDto));
     }
 
     @Test

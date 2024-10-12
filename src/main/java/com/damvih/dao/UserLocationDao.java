@@ -37,4 +37,9 @@ public class UserLocationDao extends Dao<UserLocation> {
         }
     }
 
+    @Override
+    protected String getConstraintViolationExceptionMessage() {
+        return "User already has this location!";
+    }
+
 }
