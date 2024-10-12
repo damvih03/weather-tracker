@@ -86,8 +86,8 @@ public class WeatherApiServiceTest {
     public void testSuccessfulGettingWeatherByCoordinates() throws IOException, InterruptedException {
         String jsonResponse = "{\"coord\":{\"lon\":135.0769,\"lat\":48.4814},\"weather\":[{\"id\":800," +
                 "\"main\":\"Clear\",\"description\":\"clear sky\",\"icon\":\"01d\"}]," +
-                "\"base\":\"stations\",\"main\":{\"temp\":293.03,\"feels_like\":291.86,\"temp_min\":293.03," +
-                "\"temp_max\":293.03,\"pressure\":1020,\"humidity\":30,\"sea_level\":1020,\"grnd_level\":1009}," +
+                "\"base\":\"stations\",\"main\":{\"temp\":10.94,\"feels_like\":9.4,\"temp_min\":10.94," +
+                "\"temp_max\":10.94,\"pressure\":1020,\"humidity\":30,\"sea_level\":1020,\"grnd_level\":1009}," +
                 "\"visibility\":10000,\"wind\":{\"speed\":5,\"deg\":250},\"clouds\":{\"all\":0},\"dt\":1728027545," +
                 "\"sys\":{\"type\":1,\"id\":8867,\"country\":\"RU\",\"sunrise\":1727989385,\"sunset\":1728030814}" +
                 ",\"timezone\":36000,\"id\":2022890,\"name\":\"Khabarovsk\",\"cod\":200}";

@@ -18,8 +18,8 @@ public class WeatherViewDto {
     private String locationName;
     private String country;
 
-    private BigDecimal temperature;
-    private BigDecimal feelsLike;
+    private Double temperature;
+    private Double feelsLike;
     private String description;
 
     private Integer windSpeed;

@@ -4,23 +4,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
-import java.math.BigDecimal;
-
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MainApiDto {
 
     @JsonProperty("temp")
-    private BigDecimal temperature;
+    private Double temperature;
 
     @JsonProperty("feels_like")
-    private BigDecimal feelsLike;
+    private Double feelsLike;
 
     @JsonProperty("temp_min")
-    private BigDecimal minTemperature;
+    private Double minTemperature;
 
     @JsonProperty("temp_max")
-    private BigDecimal maxTemperature;
+    private Double maxTemperature;
 
     private Integer pressure;
 
