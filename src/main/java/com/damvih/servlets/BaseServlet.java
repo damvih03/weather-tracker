@@ -10,6 +10,7 @@ import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.WebContext;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 abstract public class BaseServlet extends HttpServlet {
 
@@ -29,6 +30,14 @@ abstract public class BaseServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         webContext = (WebContext) ThymeleafUtil.buildWebContext(request, response, getServletContext());
         super.service(request, response);
+    }
+
+    protected BigDecimal getValueInBigDecimal(String value) {
+        try {
+            return new BigDecimal(value);
+        } catch (Exception exception) {
+            throw new IllegalArgumentException();
+        }
     }
 
 }
