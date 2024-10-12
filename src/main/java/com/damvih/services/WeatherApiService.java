@@ -23,6 +23,7 @@ public class WeatherApiService {
     private static final String MAIN_URL = "https://api.openweathermap.org";
     private static final String WEATHER_SUFFIX = "/data/2.5/weather";
     private static final String GEOCODING_SUFFIX = "/geo/1.0/direct";
+    private static final String UNITS_OF_MEASUREMENT = "metric";
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final HttpClient client;
 
@@ -77,6 +78,7 @@ public class WeatherApiService {
                         + WEATHER_SUFFIX
                         + "?lat=" + latitude
                         + "&lon=" + longitude
+                        + "&units=" + UNITS_OF_MEASUREMENT
                         + "&appid=" + getKey()
         );
     }
