@@ -4,19 +4,16 @@ import com.damvih.dto.LocationRequestDto;
 import com.damvih.dto.api.geocoding.GeocodingApiResponseDto;
 import com.damvih.entities.Location;
 import com.damvih.entities.Session;
-import com.damvih.exceptions.LocationNotFoundException;
 import com.damvih.services.LocationService;
 import com.damvih.services.UserLocationService;
 import com.damvih.services.WeatherApiService;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
 @WebServlet("/locations")
 public class LocationsServlet extends BaseServlet {
