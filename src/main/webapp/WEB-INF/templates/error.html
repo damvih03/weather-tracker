@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error page</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="error-title">Exception</h1>
+
+        <div th:if="${error.length() != null}">
+            <p th:text="${error}"></p>
+        </div>
+
+        <a href="/home">Back to home page</a>
+    </div>
+</body>
