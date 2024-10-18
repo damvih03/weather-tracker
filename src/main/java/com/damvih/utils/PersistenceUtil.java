@@ -14,10 +14,12 @@ public class PersistenceUtil {
     static {
         Configuration configuration = new Configuration();
 
+        String jdbcUrl = System.getenv("JDBC_URL");
         String username = System.getenv("DB_USERNAME");
         String password = System.getenv("DB_PASSWORD");
 
-        if (username != null && password != null) {
+        if (jdbcUrl != null && username != null && password != null) {
+            configuration.setProperty("jakarta.persistence.jdbc.url", jdbcUrl);
             configuration.setProperty("jakarta.persistence.jdbc.user", username);
             configuration.setProperty("jakarta.persistence.jdbc.password", password);
         }
