@@ -11,9 +11,13 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    springVersion = '7.0.0-RC3'
+}
+
 dependencies {
-    implementation 'org.springframework:spring-webmvc:7.0.0-RC3'
+    implementation "org.springframework:spring-webmvc:${springVersion}"
     compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
-    implementation 'org.springframework:spring-orm:7.0.0-RC3'
+    implementation "org.springframework:spring-orm:${springVersion}"
     implementation 'org.hibernate.orm:hibernate-core:7.1.6.Final'
 }
