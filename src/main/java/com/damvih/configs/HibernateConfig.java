@@ -1,7 +1,5 @@
 package com.damvih.configs;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -16,12 +14,6 @@ import javax.sql.DataSource;
 public class HibernateConfig {
 
     public static final String ENTITIES_PACKAGE = "com.damvih.entities";
-
-    @Bean
-    public DataSource dataSource() {
-        HikariConfig config = new HikariConfig("datasource.properties");
-        return new HikariDataSource(config);
-    }
 
     @Bean
     @DependsOn("flyway")
