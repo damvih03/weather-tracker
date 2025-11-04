@@ -1,4 +1,4 @@
-package com.damvih;
+package com.damvih.configs;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

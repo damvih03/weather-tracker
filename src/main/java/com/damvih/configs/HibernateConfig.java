@@ -1,4 +1,4 @@
-package com.damvih;
+package com.damvih.configs;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
