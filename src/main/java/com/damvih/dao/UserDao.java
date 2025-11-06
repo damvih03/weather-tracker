@@ -18,7 +18,6 @@ public class UserDao {
     public User save(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.persist(user);
-        session.flush();
         return user;
     }
 
