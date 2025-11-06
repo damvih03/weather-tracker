@@ -15,11 +15,12 @@ import lombok.Setter;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_sequence")
+    @SequenceGenerator(name = "users_sequence", sequenceName = "users_seq", allocationSize = 1, initialValue = 1)
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private  String username;
+    private String username;
 
     @Column(nullable = false)
     private String password;

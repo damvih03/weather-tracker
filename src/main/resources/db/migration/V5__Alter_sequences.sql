@@ -1,0 +1,2 @@
+ALTER SEQUENCE public.users_seq INCREMENT BY 1;
+ALTER SEQUENCE public.locations_seq INCREMENT BY 1;

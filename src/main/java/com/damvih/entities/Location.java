@@ -17,7 +17,8 @@ import java.math.BigDecimal;
 public class Location {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "locations_sequence")
+    @SequenceGenerator(name = "locations_sequence", sequenceName = "locations_seq", allocationSize = 1, initialValue = 1)
     private Long id;
 
     private String name;
