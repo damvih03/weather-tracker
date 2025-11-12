@@ -14,8 +14,7 @@ public class UserDao extends BaseDao<User> {
         User user = session
                 .createQuery("from User where username=:username", User.class)
                 .setParameter("username", username)
-                .list()
-                .getFirst();
+                .uniqueResult();
         return Optional.ofNullable(user);
     }
 
