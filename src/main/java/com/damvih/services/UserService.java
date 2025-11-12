@@ -6,6 +6,8 @@ import com.damvih.dto.UserRegistrationDto;
 import com.damvih.dto.UserRequestDto;
 import com.damvih.entities.User;
 import com.damvih.exceptions.InvalidUserDataException;
+import com.password4j.Hash;
+import com.password4j.Password;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,11 @@ public class UserService {
     private final ModelMapper modelMapper;
 
     public UserDto create(UserRegistrationDto userRegistrationDto) {
+        Hash hashedPassword = Password.hash(userRegistrationDto.getPassword()).withBcrypt();
+
         User user = new User();
         user.setUsername(userRegistrationDto.getUsername());
-        user.setPassword(userRegistrationDto.getPassword());
+        user.setPassword(hashedPassword.getResult());
 
         userDao.save(user);
 
@@ -42,7 +46,7 @@ public class UserService {
     }
 
     private boolean isPasswordCorrect(UserRequestDto userRequestDto, User user) {
-        return userRequestDto.getPassword().equals(user.getPassword());
+        return Password.check(userRequestDto.getPassword(), user.getPassword()).withBcrypt();
     }
 
 }
