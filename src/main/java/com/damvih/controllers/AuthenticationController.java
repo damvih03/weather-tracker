@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -25,24 +26,37 @@ public class AuthenticationController {
     private final UserService userService;
     private final SessionService sessionService;
 
+    @GetMapping("/sign-in")
+    public String getSignInPage() {
+        return "sign-in";
+    }
+
+    @GetMapping("/sign-up")
+    public String getSignUpPage() {
+        return "sign-up";
+    }
+
     @PostMapping("/sign-in")
-    public void signIn(@ModelAttribute UserRequestDto userRequestDto, HttpServletResponse response) {
+    public String signIn(@ModelAttribute UserRequestDto userRequestDto, HttpServletResponse response) {
         UserDto userDto = userService.get(userRequestDto);
         SessionDto sessionDto = sessionService.create(userDto);
         response.addCookie(new Cookie(SESSION_ID_COOKIE_NAME, sessionDto.getId().toString()));
+        return "redirect:/";
     }
 
     @PostMapping("/sign-up")
-    public void signUp(@ModelAttribute UserRegistrationDto userRegistrationDto, HttpServletResponse response) {
+    public String signUp(@ModelAttribute UserRegistrationDto userRegistrationDto, HttpServletResponse response) {
         UserDto userDto = userService.create(userRegistrationDto);
         SessionDto sessionDto = sessionService.create(userDto);
         response.addCookie(new Cookie(SESSION_ID_COOKIE_NAME, sessionDto.getId().toString()));
+        return "redirect:/";
     }
 
     @PostMapping("/sign-out")
-    public void signOut(@CookieValue(name = SESSION_ID_COOKIE_NAME) String sessionId, HttpServletResponse response) {
+    public String signOut(@CookieValue(name = SESSION_ID_COOKIE_NAME) String sessionId, HttpServletResponse response) {
         sessionService.delete(UUID.fromString(sessionId));
         response.addCookie(new Cookie(SESSION_ID_COOKIE_NAME, null));
+        return "redirect:/sign-in";
     }
 
 }
