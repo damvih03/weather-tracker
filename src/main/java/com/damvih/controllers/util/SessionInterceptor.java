@@ -1,6 +1,7 @@
 package com.damvih.controllers.util;
 
 import com.damvih.dto.SessionDto;
+import com.damvih.exceptions.InvalidSessionException;
 import com.damvih.services.SessionService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         UUID id = getIdFromCookie(request.getCookies())
-                .orElseThrow(() -> new RuntimeException("Invalid session cookie."));
+                .orElseThrow(() -> new InvalidSessionException("Invalid session cookie."));
         SessionDto sessionDto = sessionService.getValid(id);
         request.setAttribute("session", sessionDto);
         return true;

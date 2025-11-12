@@ -5,6 +5,7 @@ import com.damvih.dto.UserDto;
 import com.damvih.dto.UserRegistrationDto;
 import com.damvih.dto.UserRequestDto;
 import com.damvih.entities.User;
+import com.damvih.exceptions.InvalidUserDataException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -31,10 +32,10 @@ public class UserService {
     public UserDto get(UserRequestDto userRequestDto) {
         User user = userDao
                 .findByUsername(userRequestDto.getUsername())
-                .orElseThrow();
+                .orElseThrow(InvalidUserDataException::new);
 
         if (!isPasswordCorrect(userRequestDto, user)) {
-            throw new RuntimeException("Incorrect password.");
+            throw new InvalidUserDataException();
         }
 
         return modelMapper.map(user, UserDto.class);
