@@ -37,4 +37,17 @@ public class SessionService {
         sessionDao.delete(session);
     }
 
+    public SessionDto getValid(UUID id) {
+        Session session = sessionDao.findById(id)
+                .orElseThrow(() -> new RuntimeException("Session is not found."));
+        if (isExpired(session)) {
+            throw new RuntimeException("Session is expired.");
+        }
+        return new SessionDto(session.getId(), modelMapper.map(session.getUser(), UserDto.class));
+    }
+
+    public boolean isExpired(Session session) {
+        return LocalDateTime.now().isAfter(session.getExpiresAt());
+    }
+
 }
