@@ -25,8 +25,14 @@ public class GlobalExceptionHandler {
     public String handleDataIntegrityViolationException(DataIntegrityViolationException exception, Model model) {
         if (exception.getMessage().contains("users_username_key")) {
             model.addAttribute("error", "Username is already taken. Try another one.");
+            return "sign-up";
         }
-        return "sign-up";
+        return "error";
+    }
+
+    @ExceptionHandler(Exception.class)
+    public String handleException() {
+        return "error";
     }
 
 }
