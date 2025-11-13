@@ -7,6 +7,7 @@ import com.damvih.dto.UserRequestDto;
 import com.damvih.services.SessionService;
 import com.damvih.services.UserService;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -53,8 +54,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/sign-out")
-    public String signOut(@CookieValue(name = SESSION_ID_COOKIE_NAME) String sessionId, HttpServletResponse response) {
-        sessionService.delete(UUID.fromString(sessionId));
+    public String signOut(HttpServletRequest request, HttpServletResponse response) {
+        SessionDto sessionDto = (SessionDto) request.getAttribute("session");
+        sessionService.delete(sessionDto.getId());
         response.addCookie(new Cookie(SESSION_ID_COOKIE_NAME, null));
         return "redirect:/sign-in";
     }
