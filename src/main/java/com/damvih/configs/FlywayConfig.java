@@ -13,6 +13,7 @@ public class FlywayConfig {
     public Flyway flyway(DataSource dataSource) {
         Flyway flyway = Flyway.configure()
                 .dataSource(dataSource)
+                .defaultSchema("main")
                 .load();
 
         flyway.migrate();
