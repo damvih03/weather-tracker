@@ -9,14 +9,14 @@ import com.damvih.services.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -46,7 +46,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/sign-up")
-    public String signUp(@ModelAttribute UserRegistrationDto userRegistrationDto, HttpServletResponse response) {
+    public String signUp(@ModelAttribute @Valid UserRegistrationDto userRegistrationDto,
+                         BindingResult bindingResult, HttpServletResponse response, Model model) {
+        if (bindingResult.hasErrors()) {
+            addFieldErrorsToModel(bindingResult, model);
+            return "sign-up";
+        }
         UserDto userDto = userService.create(userRegistrationDto);
         SessionDto sessionDto = sessionService.create(userDto);
         response.addCookie(new Cookie(SESSION_ID_COOKIE_NAME, sessionDto.getId().toString()));
@@ -59,6 +64,12 @@ public class AuthenticationController {
         sessionService.delete(sessionDto.getId());
         response.addCookie(new Cookie(SESSION_ID_COOKIE_NAME, null));
         return "redirect:/sign-in";
+    }
+
+    private void addFieldErrorsToModel(BindingResult bindingResult, Model model) {
+        bindingResult.getFieldErrors().forEach(error ->
+                model.addAttribute(error.getField() + "Error", error.getDefaultMessage())
+        );
     }
 
 }

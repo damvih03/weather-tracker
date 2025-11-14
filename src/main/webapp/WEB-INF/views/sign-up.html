@@ -21,15 +21,33 @@
             <form th:action="@{/sign-up}" method="post">
                 <div class="mb-2">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" id="username" name="username" class="form-control">
+                    <input type="text" id="username" name="username" class="form-control" pattern="^[A-Za-z0-9]{4,16}$" title="Only english letters and numbers, 4-16 characters">
+                    <div class="form-text text-secondary">
+                        * Username should contain 4-16 characters, english letters and digits only.
+                    </div>
+                    <div th:if="${usernameError != null}" th:text="${usernameError}" class="form-text text-danger">
+
+                    </div>
                 </div>
                 <div class="mb-2">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" name="password" class="form-control">
+                    <input type="password" id="password" name="password" class="form-control" pattern="^[A-Za-z0-9]{4,20}$" title="Only english letters and numbers, 4-20 characters">
+                    <div class="form-text text-secondary">
+                        * Password should contain 4-20 characters, english letters and digits only.
+                    </div>
+                    <div th:if="${passwordError != null}" th:text="${passwordError}" class="form-text text-danger">
+
+                    </div>
                 </div>
                 <div class="mb-2">
                     <label for="repeatedPassword" class="form-label">Repeat password</label>
-                    <input type="password" id="repeatedPassword" name="repeatedPassword" class="form-control">
+                    <input type="password" id="repeatedPassword" name="repeatedPassword" class="form-control" pattern="^[A-Za-z0-9]{4,20}$" title="Only english letters and numbers, 4-20 characters">
+                    <div th:if="${repeatedPasswordError != null}" th:text="${repeatedPasswordError}" class="form-text text-danger">
+
+                    </div>
+                    <div th:if="${passwordsMatchError != null}" th:text="${passwordsMatchError}" class="form-text text-danger">
+
+                    </div>
                 </div>
                 <div class="mt-4">
                     <button class="btn btn-primary w-100">Sign up</button>

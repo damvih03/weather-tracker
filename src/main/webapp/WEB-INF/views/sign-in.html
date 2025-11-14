@@ -21,11 +21,11 @@
             <form th:action="@{/sign-in}" method="post">
                 <div class="mb-2">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" id="username" name="username" class="form-control">
+                    <input type="text" id="username" name="username" class="form-control" pattern="^[A-Za-z0-9]{4,16}$">
                 </div>
                 <div class="mb-2">
                     <label for="username" class="form-label">Password</label>
-                    <input type="password" id="password" name="password" class="form-control">
+                    <input type="password" id="password" name="password" class="form-control" pattern="^[A-Za-z0-9]{4,20}$">
                 </div>
                 <div class="mt-4">
                     <button class="btn btn-primary w-100">Sign in</button>
