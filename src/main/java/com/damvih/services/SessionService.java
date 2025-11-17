@@ -6,6 +6,7 @@ import com.damvih.entities.Session;
 import com.damvih.exceptions.InvalidSessionException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +42,7 @@ public class SessionService {
         return modelMapper.map(session, SessionDto.class);
     }
 
+    @Scheduled(fixedDelay = 3600000)
     public void deleteIfExpired() {
         sessionDao.deleteIfExpired();
     }
