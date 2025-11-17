@@ -2,9 +2,7 @@ package com.damvih.services;
 
 import com.damvih.dao.SessionDao;
 import com.damvih.dto.SessionDto;
-import com.damvih.dto.UserDto;
 import com.damvih.entities.Session;
-import com.damvih.entities.User;
 import com.damvih.exceptions.InvalidSessionException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,13 +20,9 @@ public class SessionService {
     private final SessionDao sessionDao;
     private final ModelMapper modelMapper;
 
-    public SessionDto create(UserDto userDto) {
-        Session session = sessionDao.save(new Session(
-                UUID.randomUUID(),
-                modelMapper.map(userDto, User.class),
-                LocalDateTime.now().plusHours(6)
-        ));
-        return new SessionDto(session.getId(), modelMapper.map(session.getUser(), UserDto.class));
+    public SessionDto create(SessionDto sessionDto) {
+        Session session = sessionDao.save(modelMapper.map(sessionDto, Session.class));
+        return modelMapper.map(session, SessionDto.class);
     }
 
     public void delete(UUID id) {
@@ -44,7 +38,7 @@ public class SessionService {
         if (isExpired(session)) {
             throw new InvalidSessionException("Session is expired.");
         }
-        return new SessionDto(session.getId(), modelMapper.map(session.getUser(), UserDto.class));
+        return modelMapper.map(session, SessionDto.class);
     }
 
     public void deleteIfExpired() {

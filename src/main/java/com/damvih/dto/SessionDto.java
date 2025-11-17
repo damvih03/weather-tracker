@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -15,5 +16,6 @@ public class SessionDto {
 
     private UUID id;
     private UserDto userDto;
+    private LocalDateTime expiresAt;
 
 }

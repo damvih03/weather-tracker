@@ -1,11 +1,9 @@
 package com.damvih.controllers;
 
 import com.damvih.dto.SessionDto;
-import com.damvih.dto.UserDto;
 import com.damvih.dto.UserRegistrationDto;
 import com.damvih.dto.UserRequestDto;
-import com.damvih.services.SessionService;
-import com.damvih.services.UserService;
+import com.damvih.services.AuthenticationService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,8 +22,7 @@ public class AuthenticationController {
 
     public static final String SESSION_ID_COOKIE_NAME = "SESSION_ID";
 
-    private final UserService userService;
-    private final SessionService sessionService;
+    private final AuthenticationService authenticationService;
 
     @GetMapping("/sign-in")
     public String getSignInPage() {
@@ -39,8 +36,7 @@ public class AuthenticationController {
 
     @PostMapping("/sign-in")
     public String signIn(@ModelAttribute UserRequestDto userRequestDto, HttpServletResponse response) {
-        UserDto userDto = userService.get(userRequestDto);
-        SessionDto sessionDto = sessionService.create(userDto);
+        SessionDto sessionDto = authenticationService.signIn(userRequestDto);
         response.addCookie(new Cookie(SESSION_ID_COOKIE_NAME, sessionDto.getId().toString()));
         return "redirect:/";
     }
@@ -52,8 +48,7 @@ public class AuthenticationController {
             addFieldErrorsToModel(bindingResult, model);
             return "sign-up";
         }
-        UserDto userDto = userService.create(userRegistrationDto);
-        SessionDto sessionDto = sessionService.create(userDto);
+        SessionDto sessionDto = authenticationService.signUp(userRegistrationDto);
         response.addCookie(new Cookie(SESSION_ID_COOKIE_NAME, sessionDto.getId().toString()));
         return "redirect:/";
     }
@@ -61,7 +56,7 @@ public class AuthenticationController {
     @PostMapping("/sign-out")
     public String signOut(HttpServletRequest request, HttpServletResponse response) {
         SessionDto sessionDto = (SessionDto) request.getAttribute("session");
-        sessionService.delete(sessionDto.getId());
+        authenticationService.signOut(sessionDto);
         response.addCookie(new Cookie(SESSION_ID_COOKIE_NAME, null));
         return "redirect:/sign-in";
     }
