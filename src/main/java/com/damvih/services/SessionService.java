@@ -6,7 +6,6 @@ import com.damvih.dto.UserDto;
 import com.damvih.entities.Session;
 import com.damvih.entities.User;
 import com.damvih.exceptions.InvalidSessionException;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -46,6 +45,10 @@ public class SessionService {
             throw new InvalidSessionException("Session is expired.");
         }
         return new SessionDto(session.getId(), modelMapper.map(session.getUser(), UserDto.class));
+    }
+
+    public void deleteIfExpired() {
+        sessionDao.deleteIfExpired();
     }
 
     public boolean isExpired(Session session) {

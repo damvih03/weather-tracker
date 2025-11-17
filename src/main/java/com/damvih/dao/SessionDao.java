@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,6 +18,13 @@ public class SessionDao extends BaseDao<Session> {
     public Optional<Session> findById(UUID id) {
         Session session = sessionFactory.getCurrentSession().find(Session.class, id);
         return Optional.ofNullable(session);
+    }
+
+    public void deleteIfExpired() {
+        sessionFactory.getCurrentSession()
+                .createMutationQuery("delete from Session s where expiresAt<=:dateTime")
+                .setParameter("dateTime", LocalDateTime.now())
+                .executeUpdate();
     }
 
 }
