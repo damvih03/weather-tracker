@@ -8,7 +8,7 @@ import org.springframework.context.annotation.*;
 @Configuration
 @ComponentScan(basePackages = {"com.damvih.dao", "com.damvih.services"})
 @PropertySource("classpath:application.properties")
-@Import({TaskSchedulerConfig.class})
+@Import({RestClientConfig.class, TaskSchedulerConfig.class})
 public class AppConfig {
 
     @Bean
