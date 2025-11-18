@@ -1,1 +1,0 @@
-ALTER SCHEMA public RENAME TO main;
