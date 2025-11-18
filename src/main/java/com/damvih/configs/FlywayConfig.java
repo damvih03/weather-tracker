@@ -11,10 +11,9 @@ import javax.sql.DataSource;
 public class FlywayConfig {
 
     @Bean
-    public Flyway flyway(DataSource dataSource, @Value("${schema}") String schemaName) {
+    public Flyway flyway(DataSource dataSource) {
         Flyway flyway = Flyway.configure()
                 .dataSource(dataSource)
-                .defaultSchema(schemaName)
                 .load();
 
         flyway.migrate();

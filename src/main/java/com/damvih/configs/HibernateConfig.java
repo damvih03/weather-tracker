@@ -1,6 +1,5 @@
 package com.damvih.configs;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -9,7 +8,6 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
-import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
@@ -17,15 +15,11 @@ public class HibernateConfig {
 
     public static final String ENTITIES_PACKAGE = "com.damvih.entities";
 
-    @Value("${schema}")
-    private String schemaName;
-
     @Bean
     @DependsOn("flyway")
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        sessionFactory.setHibernateProperties(addProperties());
         sessionFactory.setPackagesToScan(ENTITIES_PACKAGE);
         return sessionFactory;
     }
@@ -35,12 +29,6 @@ public class HibernateConfig {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory.getObject());
         return transactionManager;
-    }
-
-    private Properties addProperties() {
-        Properties properties = new Properties();
-        properties.put("hibernate.default_schema", schemaName);
-        return properties;
     }
 
 }

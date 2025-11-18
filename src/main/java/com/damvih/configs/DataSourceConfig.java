@@ -9,7 +9,6 @@ import org.springframework.context.annotation.PropertySource;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:datasource.properties")
 public class DataSourceConfig {
 
     public static final String PROPERTIES_FILE = "datasource.properties";
