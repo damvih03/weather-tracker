@@ -3,14 +3,12 @@ package com.damvih.configs;
 import com.damvih.dto.SessionDto;
 import com.damvih.entities.Session;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 
 @Configuration
 @ComponentScan(basePackages = {"com.damvih.dao", "com.damvih.services"})
 @PropertySource("classpath:application.properties")
+@Import({TaskSchedulerConfig.class})
 public class AppConfig {
 
     @Bean
