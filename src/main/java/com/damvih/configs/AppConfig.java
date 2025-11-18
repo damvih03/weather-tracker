@@ -2,6 +2,7 @@ package com.damvih.configs;
 
 import com.damvih.dto.SessionDto;
 import com.damvih.entities.Session;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.*;
 
@@ -20,6 +21,11 @@ public class AppConfig {
         });
 
         return modelMapper;
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 
 }
