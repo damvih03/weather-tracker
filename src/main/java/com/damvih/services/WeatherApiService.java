@@ -3,9 +3,11 @@ package com.damvih.services;
 import com.damvih.dto.GeocodedWeatherDto;
 import com.damvih.dto.GeodataApiRequestDto;
 import com.damvih.dto.LocationApiResponseDto;
+import com.damvih.exceptions.WeatherApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -31,6 +33,12 @@ public class WeatherApiService {
                         .build()
                 )
                 .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
+                    throw new WeatherApiException("Client API error: " + response.getStatusCode());
+                })
+                .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
+                    throw new WeatherApiException("Server API error: " + response.getStatusCode());
+                })
                 .body(new ParameterizedTypeReference<>() {});
     }
 
@@ -45,6 +53,12 @@ public class WeatherApiService {
                         .build()
                 )
                 .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
+                    throw new WeatherApiException("Client API error: " + response.getStatusCode());
+                })
+                .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
+                    throw new WeatherApiException("Server API error: " + response.getStatusCode());
+                })
                 .body(GeocodedWeatherDto.class);
     }
 
