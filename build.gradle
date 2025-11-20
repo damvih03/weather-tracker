@@ -34,6 +34,7 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${jUnitVersion}"
     testImplementation "org.junit.platform:junit-platform-launcher:${jUnitVersion}"
     testImplementation 'org.glassfish:jakarta.el:4.0.2'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.20.0'
 }
 
 test {
