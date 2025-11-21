@@ -25,7 +25,7 @@ public class RestClientConfig {
                 .requestInterceptor((request, body, execution) -> {
                     URI uri = UriComponentsBuilder.fromUri(request.getURI())
                             .queryParam("appid", weatherApiKey)
-                            .build()
+                            .build(true)
                             .toUri();
 
                     HttpRequest modifiedRequest = new HttpRequestWrapper(request) {
