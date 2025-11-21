@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class LocationApiResponseDto {
 
+    private String name;
+
     @JsonProperty("lat")
     private BigDecimal latitude;
 
