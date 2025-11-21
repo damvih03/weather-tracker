@@ -12,7 +12,9 @@ import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClient.RequestBodyUriSpec;
 import org.springframework.web.client.RestClient.ResponseSpec;
@@ -20,6 +22,7 @@ import org.springframework.web.client.RestClient.ResponseSpec;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
 public class WeatherApiServiceTest {
@@ -52,6 +55,7 @@ public class WeatherApiServiceTest {
         Mockito.when(restClient.method(HttpMethod.GET)).thenReturn(requestBodyUriSpec);
         Mockito.when(requestBodyUriSpec.uri(Mockito.any(Function.class))).thenReturn(requestBodyUriSpec);
         Mockito.when(requestBodyUriSpec.retrieve()).thenReturn(responseSpec);
+        Mockito.when(responseSpec.onStatus(Mockito.any(Predicate.class), Mockito.any(ResponseSpec.ErrorHandler.class))).thenReturn(responseSpec);
         Mockito.when(responseSpec.body(Mockito.any(ParameterizedTypeReference.class))).thenAnswer(invocation -> {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(jsonResponse, new TypeReference<List<LocationApiResponseDto>>() {});
@@ -71,6 +75,7 @@ public class WeatherApiServiceTest {
         Mockito.when(restClient.method(HttpMethod.GET)).thenReturn(requestBodyUriSpec);
         Mockito.when(requestBodyUriSpec.uri(Mockito.any(Function.class))).thenReturn(requestBodyUriSpec);
         Mockito.when(requestBodyUriSpec.retrieve()).thenReturn(responseSpec);
+        Mockito.when(responseSpec.onStatus(Mockito.any(Predicate.class), Mockito.any(ResponseSpec.ErrorHandler.class))).thenReturn(responseSpec);
         Mockito.when(responseSpec.body(Mockito.any(ParameterizedTypeReference.class))).thenAnswer(invocation -> {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(jsonResponse, new TypeReference<List<LocationApiResponseDto>>() {});
@@ -93,6 +98,7 @@ public class WeatherApiServiceTest {
         Mockito.when(restClient.method(HttpMethod.GET)).thenReturn(requestBodyUriSpec);
         Mockito.when(requestBodyUriSpec.uri(Mockito.any(Function.class))).thenReturn(requestBodyUriSpec);
         Mockito.when(requestBodyUriSpec.retrieve()).thenReturn(responseSpec);
+        Mockito.when(responseSpec.onStatus(Mockito.any(Predicate.class), Mockito.any(ResponseSpec.ErrorHandler.class))).thenReturn(responseSpec);
         Mockito.when(responseSpec.body(GeocodedWeatherDto.class)).thenAnswer(invocation -> {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(jsonResponse, GeocodedWeatherDto.class);
