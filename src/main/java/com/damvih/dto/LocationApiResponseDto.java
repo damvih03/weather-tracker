@@ -26,4 +26,6 @@ public class LocationApiResponseDto {
 
     private String country;
 
+    private String state;
+
 }
