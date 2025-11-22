@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class HibernateConfig {
 
-    public static final String ENTITIES_PACKAGE = "com.damvih.entities";
+    public static final String ENTITIES_PACKAGE = "com.damvih.entity";
 
     @Bean
     @DependsOn("flyway")
