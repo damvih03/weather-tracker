@@ -6,7 +6,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{DataSourceConfig.class, FlywayConfig.class, HibernateConfig.class, ThymeleafConfig.class, AppConfig.class};
+        return new Class[]{DataSourceConfig.class, AppConfig.class};
     }
 
     @Override

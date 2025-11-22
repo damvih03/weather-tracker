@@ -31,7 +31,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public String handleException() {
+    public String handleException(Exception exception) {
+        System.out.println(exception.getMessage());
         return "error";
     }
 
