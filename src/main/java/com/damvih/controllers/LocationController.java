@@ -41,4 +41,11 @@ public class LocationController {
         return "redirect:/";
     }
 
+    @PostMapping("/delete-location")
+    public String delete(@ModelAttribute @Valid LocationRequestDto locationRequestDto, HttpServletRequest request) {
+        UserDto userDto = ((SessionDto) request.getAttribute("session")).getUserDto();
+        userLocationManagementService.delete(userDto, locationRequestDto);
+        return "redirect:/";
+    }
+
 }

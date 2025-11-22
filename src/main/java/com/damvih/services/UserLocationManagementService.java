@@ -2,6 +2,7 @@ package com.damvih.services;
 
 import com.damvih.dao.LocationDao;
 import com.damvih.dao.UserLocationDao;
+import com.damvih.dto.LocationDto;
 import com.damvih.dto.LocationRequestDto;
 import com.damvih.dto.UserDto;
 import com.damvih.entities.Location;
@@ -13,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -38,6 +41,13 @@ public class UserLocationManagementService {
         userLocationDao.delete(new UserLocation(
                 new UserLocationKey(modelMapper.map(userDto, User.class), location)
         ));
+    }
+
+    public List<LocationDto> get(UserDto userDto) {
+        List<Location> userLocations = userLocationDao.findAllByUser(modelMapper.map(userDto, User.class));
+        return userLocations.stream()
+                .map(location -> modelMapper.map(location, LocationDto.class))
+                .toList();
     }
 
 }

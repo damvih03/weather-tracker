@@ -6,6 +6,7 @@
     <title>Weather Tracker | Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar bg-light" data-bs-theme="light">
@@ -38,6 +39,33 @@
                     <i class="bi bi-search"></i>
                 </button>
             </form>
+        </div>
+
+        <div>
+            <div class="row">
+                <div th:each="weather: ${weathers}" class="col-12 col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100 position-relative weather-card">
+                        <form th:action="@{/delete-location}" method="post" class="position-absolute top-0 end-0 m-2">
+                            <input name="latitude" type="hidden" th:value="${weather.getKey().getLatitude()}">
+                            <input name="longitude" type="hidden" th:value="${weather.getKey().getLongitude()}">
+                            <input name="name" type="hidden" th:value="${weather.getKey().getName()}">
+                            <button class="btn-close" aria-label="Delete"></button>
+                        </form>
+                        <img class="card-img-top img-fluid"
+                             th:src="'https://openweathermap.org/img/wn/' + ${weather.getValue().getWeatherIcon()} + '@4x.png'"
+                             alt="Weather icon">
+                        <div class="card-body d-flex flex-column">
+                            <h1 th:text="${weather.getValue().getActualTemperature()} + '°C'" class="card-text"></h1>
+                            <h3 th:text="${weather.getKey().getName()} + ', ' + ${weather.getValue().getCountry()}" class="card-title">Tbilisi, GE</h3>
+                            <p class="card-text mb-1">Feels like <span th:text="${weather.getValue().getFeelsLikeTemperature()}"></span>°C.
+                                <span th:text="${weather.getValue().getMainWeatherGroup()}"></span>
+                            </p>
+                            <p th:text="'Humidity: ' + ${weather.getValue().getHumidity()} + ' %'" class="card-text mb-1"></p>
+                            <p th:text="'Pressure: ' + ${weather.getValue().getPressure()} + ' Pa'" class="card-text mb-1"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
