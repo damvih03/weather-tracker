@@ -1,7 +1,7 @@
 package com.damvih.service;
 
 import com.damvih.dao.SessionDao;
-import com.damvih.dto.SessionDto;
+import com.damvih.dto.session.SessionDto;
 import com.damvih.entity.Session;
 import com.damvih.exception.InvalidSessionException;
 import lombok.RequiredArgsConstructor;

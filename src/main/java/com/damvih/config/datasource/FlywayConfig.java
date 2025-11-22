@@ -1,4 +1,4 @@
-package com.damvih.config;
+package com.damvih.config.datasource;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;

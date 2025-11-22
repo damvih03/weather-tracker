@@ -1,6 +1,6 @@
 package com.damvih.controller.util;
 
-import com.damvih.dto.SessionDto;
+import com.damvih.dto.session.SessionDto;
 import com.damvih.exception.InvalidSessionException;
 import com.damvih.service.SessionService;
 import jakarta.servlet.http.Cookie;

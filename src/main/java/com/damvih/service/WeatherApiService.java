@@ -1,8 +1,8 @@
 package com.damvih.service;
 
-import com.damvih.dto.GeocodedWeatherDto;
-import com.damvih.dto.GeodataApiRequestDto;
-import com.damvih.dto.LocationApiResponseDto;
+import com.damvih.dto.api.GeocodedWeatherDto;
+import com.damvih.dto.api.GeodataApiRequestDto;
+import com.damvih.dto.api.LocationApiResponseDto;
 import com.damvih.exception.WeatherApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;

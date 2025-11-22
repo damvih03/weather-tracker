@@ -1,9 +1,9 @@
 package com.damvih.service;
 
 import com.damvih.dao.UserDao;
-import com.damvih.dto.UserDto;
-import com.damvih.dto.UserRegistrationDto;
-import com.damvih.dto.UserRequestDto;
+import com.damvih.dto.user.UserDto;
+import com.damvih.dto.user.UserRegistrationDto;
+import com.damvih.dto.user.UserRequestDto;
 import com.damvih.entity.User;
 import com.damvih.exception.InvalidUserDataException;
 import com.password4j.Hash;

@@ -1,9 +1,9 @@
 package com.damvih.service;
 
-import com.damvih.dto.SessionDto;
-import com.damvih.dto.UserDto;
-import com.damvih.dto.UserRegistrationDto;
-import com.damvih.dto.UserRequestDto;
+import com.damvih.dto.session.SessionDto;
+import com.damvih.dto.user.UserDto;
+import com.damvih.dto.user.UserRegistrationDto;
+import com.damvih.dto.user.UserRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

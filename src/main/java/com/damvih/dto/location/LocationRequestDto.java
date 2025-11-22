@@ -1,4 +1,4 @@
-package com.damvih.dto;
+package com.damvih.dto.location;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LocationDto {
+public class LocationRequestDto {
 
     private BigDecimal latitude;
     private BigDecimal longitude;

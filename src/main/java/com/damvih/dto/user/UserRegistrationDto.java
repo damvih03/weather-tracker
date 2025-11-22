@@ -1,4 +1,4 @@
-package com.damvih.dto;
+package com.damvih.dto.user;
 
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;

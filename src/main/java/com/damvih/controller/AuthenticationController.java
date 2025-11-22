@@ -1,8 +1,8 @@
 package com.damvih.controller;
 
-import com.damvih.dto.SessionDto;
-import com.damvih.dto.UserRegistrationDto;
-import com.damvih.dto.UserRequestDto;
+import com.damvih.dto.session.SessionDto;
+import com.damvih.dto.user.UserRegistrationDto;
+import com.damvih.dto.user.UserRequestDto;
 import com.damvih.service.AuthenticationService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

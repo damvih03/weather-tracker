@@ -1,12 +1,12 @@
 package com.damvih.service;
 
-import com.damvih.config.AppConfig;
-import com.damvih.config.DataSourceConfig;
-import com.damvih.config.FlywayConfig;
-import com.damvih.config.HibernateConfig;
-import com.damvih.dto.SessionDto;
-import com.damvih.dto.UserDto;
-import com.damvih.dto.UserRegistrationDto;
+import com.damvih.config.app.AppConfig;
+import com.damvih.config.datasource.DataSourceConfig;
+import com.damvih.config.datasource.FlywayConfig;
+import com.damvih.config.datasource.HibernateConfig;
+import com.damvih.dto.session.SessionDto;
+import com.damvih.dto.user.UserDto;
+import com.damvih.dto.user.UserRegistrationDto;
 import com.damvih.exception.InvalidSessionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

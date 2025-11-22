@@ -1,5 +1,8 @@
 package com.damvih.config;
 
+import com.damvih.config.app.AppConfig;
+import com.damvih.config.datasource.DataSourceConfig;
+import com.damvih.config.web.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {

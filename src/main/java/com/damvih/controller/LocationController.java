@@ -1,9 +1,9 @@
 package com.damvih.controller;
 
-import com.damvih.dto.LocationApiResponseDto;
-import com.damvih.dto.LocationRequestDto;
-import com.damvih.dto.SessionDto;
-import com.damvih.dto.UserDto;
+import com.damvih.dto.api.LocationApiResponseDto;
+import com.damvih.dto.location.LocationRequestDto;
+import com.damvih.dto.session.SessionDto;
+import com.damvih.dto.user.UserDto;
 import com.damvih.service.UserLocationManagementService;
 import com.damvih.service.WeatherApiService;
 import jakarta.servlet.http.HttpServletRequest;

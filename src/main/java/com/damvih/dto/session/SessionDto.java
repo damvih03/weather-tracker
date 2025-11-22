@@ -1,5 +1,6 @@
-package com.damvih.dto;
+package com.damvih.dto.session;
 
+import com.damvih.dto.user.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

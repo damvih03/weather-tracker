@@ -1,4 +1,4 @@
-package com.damvih.dto;
+package com.damvih.dto.api;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;

@@ -2,9 +2,9 @@ package com.damvih.service;
 
 import com.damvih.dao.LocationDao;
 import com.damvih.dao.UserLocationDao;
-import com.damvih.dto.LocationDto;
-import com.damvih.dto.LocationRequestDto;
-import com.damvih.dto.UserDto;
+import com.damvih.dto.location.LocationDto;
+import com.damvih.dto.location.LocationRequestDto;
+import com.damvih.dto.user.UserDto;
 import com.damvih.entity.Location;
 import com.damvih.entity.User;
 import com.damvih.entity.UserLocation;

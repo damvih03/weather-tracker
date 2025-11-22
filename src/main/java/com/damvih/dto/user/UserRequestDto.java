@@ -1,4 +1,4 @@
-package com.damvih.dto;
+package com.damvih.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class UserRequestDto {
 
-    private Long id;
     private String username;
+    private String password;
 
 }

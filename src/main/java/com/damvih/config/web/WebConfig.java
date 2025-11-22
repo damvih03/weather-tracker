@@ -1,4 +1,4 @@
-package com.damvih.config;
+package com.damvih.config.web;
 
 import com.damvih.controller.util.SessionInterceptor;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,9 @@
 package com.damvih.controller;
 
-import com.damvih.dto.GeocodedWeatherDto;
-import com.damvih.dto.GeodataApiRequestDto;
-import com.damvih.dto.LocationDto;
-import com.damvih.dto.SessionDto;
+import com.damvih.dto.api.GeocodedWeatherDto;
+import com.damvih.dto.api.GeodataApiRequestDto;
+import com.damvih.dto.location.LocationDto;
+import com.damvih.dto.session.SessionDto;
 import com.damvih.service.UserLocationManagementService;
 import com.damvih.service.WeatherApiService;
 import jakarta.servlet.http.HttpServletRequest;

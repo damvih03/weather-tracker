@@ -1,4 +1,4 @@
-package com.damvih.dto;
+package com.damvih.dto.api;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;

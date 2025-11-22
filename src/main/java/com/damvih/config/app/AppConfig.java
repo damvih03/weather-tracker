@@ -1,6 +1,6 @@
-package com.damvih.config;
+package com.damvih.config.app;
 
-import com.damvih.dto.SessionDto;
+import com.damvih.dto.session.SessionDto;
 import com.damvih.entity.Session;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
