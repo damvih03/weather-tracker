@@ -13,6 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class GeocodedWeatherDto {
 
+    private String country;
+
     private String mainWeatherGroup;
     private String weatherIcon;
     private Integer actualTemperature;

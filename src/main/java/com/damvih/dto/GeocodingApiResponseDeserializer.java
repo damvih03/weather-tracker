@@ -20,6 +20,7 @@ public class GeocodingApiResponseDeserializer extends JsonDeserializer<GeocodedW
         JsonNode main = root.get("main");
 
         return new GeocodedWeatherDto(
+                root.get("sys").get("country").textValue(),
                 weather.get("main").textValue(),
                 weather.get("icon").textValue(),
                 main.get("temp").asInt(),
