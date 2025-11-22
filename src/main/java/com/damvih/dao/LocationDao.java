@@ -1,6 +1,6 @@
 package com.damvih.dao;
 
-import com.damvih.entities.Location;
+import com.damvih.entity.Location;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;

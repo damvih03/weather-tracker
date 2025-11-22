@@ -1,6 +1,6 @@
 package com.damvih.dao;
 
-import com.damvih.entities.Session;
+import com.damvih.entity.Session;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;

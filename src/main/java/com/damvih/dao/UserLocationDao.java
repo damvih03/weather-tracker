@@ -1,8 +1,8 @@
 package com.damvih.dao;
 
-import com.damvih.entities.Location;
-import com.damvih.entities.User;
-import com.damvih.entities.UserLocation;
+import com.damvih.entity.Location;
+import com.damvih.entity.User;
+import com.damvih.entity.UserLocation;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

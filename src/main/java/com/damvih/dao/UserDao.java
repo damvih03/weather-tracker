@@ -1,6 +1,6 @@
 package com.damvih.dao;
 
-import com.damvih.entities.User;
+import com.damvih.entity.User;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
