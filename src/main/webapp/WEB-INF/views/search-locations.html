@@ -54,7 +54,8 @@
                                 <input name="latitude" type="hidden" th:value="${location.getLatitude()}">
                                 <input name="longitude" type="hidden" th:value="${location.getLongitude()}">
                                 <input name="name" type="hidden" th:value="${location.getName()}">
-                                <button class="btn btn-primary w-100">Add</button>
+                                <button th:if="${addedLocations.contains(location)}" class="btn btn-success w-100 disabled">Added</button>
+                                <button th:unless="${addedLocations.contains(location)}" class="btn btn-primary w-100">Add</button>
                             </form>
                         </div>
                     </div>
