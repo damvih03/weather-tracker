@@ -7,6 +7,7 @@ import com.damvih.config.datasource.HibernateConfig;
 import com.damvih.dto.session.SessionDto;
 import com.damvih.dto.user.UserRegistrationDto;
 import com.damvih.dto.user.UserRequestDto;
+import org.hibernate.exception.ConstraintViolationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import static org.hibernate.exception.ConstraintViolationException.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfig.class, DataSourceConfig.class, FlywayConfig.class, HibernateConfig.class})
@@ -41,7 +44,9 @@ public class AuthenticationServiceTest {
                 DataIntegrityViolationException.class,
                 () -> authenticationService.signUp(userRegistrationDto)
         );
-        Assertions.assertTrue(exception.getMessage().contains("users_username_key"));
+        ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception.getCause();
+
+        Assertions.assertTrue(constraintViolationException.getKind().equals(ConstraintKind.UNIQUE));
     }
 
     @Test

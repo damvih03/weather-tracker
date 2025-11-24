@@ -2,10 +2,13 @@ package com.damvih.controller.util;
 
 import com.damvih.exception.InvalidSessionException;
 import com.damvih.exception.InvalidUserDataException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import static org.hibernate.exception.ConstraintViolationException.*;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -23,7 +26,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public String handleDataIntegrityViolationException(DataIntegrityViolationException exception, Model model) {
-        if (exception.getMessage().contains("users_username_key")) {
+        ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception.getCause();
+        if (constraintViolationException.getKind().equals(ConstraintKind.UNIQUE)) {
             model.addAttribute("error", "Username is already taken. Try another one.");
             return "sign-up";
         }
