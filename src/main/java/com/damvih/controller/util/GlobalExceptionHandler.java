@@ -30,8 +30,15 @@ public class GlobalExceptionHandler {
     public String handleDataIntegrityViolationException(DataIntegrityViolationException exception, Model model) {
         ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception.getCause();
         if (constraintViolationException.getKind().equals(ConstraintKind.UNIQUE)) {
-            model.addAttribute("error", "Username is already taken. Try another one.");
-            return "sign-up";
+
+            String constraintName = constraintViolationException.getConstraintName();
+            if (constraintName.equals("users_username_key")) {
+                model.addAttribute("error", "Username is already taken. Try another one.");
+                return "sign-up";
+            } else if (constraintName.equals("users_locations_pkey")) {
+                return "redirect:/";
+            }
+
         }
         return "error";
     }
