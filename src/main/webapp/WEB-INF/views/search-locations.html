@@ -49,7 +49,7 @@
                             <p class="card-text mb-1" th:text="'Latitude: ' + ${location.getLatitude()}"></p>
                             <p class="card-text mb-1" th:text="'Longitude: ' + ${location.getLongitude()}"></p>
                             <p class="card-text mb-1" th:text="'Country: ' + ${location.getCountry()}"></p>
-                            <p class="card-text mb-1" th:text="'State: ' + ${location.getState()}"></p>
+                            <p class="card-text mb-1" th:text="'State: ' + ${location.getState() == null ? 'none' : location.getState()}"></p>
                             <form th:action="@{/add-location}" method="post" class="mt-2">
                                 <input name="latitude" type="hidden" th:value="${location.getLatitude()}">
                                 <input name="longitude" type="hidden" th:value="${location.getLongitude()}">
