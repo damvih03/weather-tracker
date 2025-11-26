@@ -5,8 +5,10 @@ import com.damvih.exception.InvalidUserDataException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import static org.hibernate.exception.ConstraintViolationException.*;
 
@@ -32,6 +34,16 @@ public class GlobalExceptionHandler {
             return "sign-up";
         }
         return "error";
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public String handleMissingServletRequestParameterException() {
+        return "redirect:/";
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public String handleNoHandlerFoundException() {
+        return "redirect:/";
     }
 
     @ExceptionHandler(Exception.class)
