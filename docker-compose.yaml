@@ -1,0 +1,31 @@
+name: weather-tracker
+
+services:
+  db:
+    image: postgres:18.0
+    container_name: weather-tracker-db-main
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: weather-tracker
+    volumes:
+      - weather-tracker-db-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d weather-tracker"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  tomcat_app:
+    image: weather-tracker
+    container_name: tomcat_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+
+volumes:
+  weather-tracker-db-data:
